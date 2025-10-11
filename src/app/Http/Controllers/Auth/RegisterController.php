@@ -21,12 +21,16 @@ class RegisterController extends Controller
         $validated = $request->validated();
 
         // ユーザー登録
-        User::create([
+        $user = User::create([
             'name' => $validated['name'],
             'email' => $validated['email'],
             'password' => Hash::make($validated['password']),
         ]);
 
-        return redirect('/login');
+        // 登録したユーザーでログイン状態にする
+        auth()->login($user);
+
+        // 登録後はプロフィール設定ページへリダイレクト
+        return redirect('/mypage/profile');
     }
 }
