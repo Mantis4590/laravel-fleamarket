@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\ProfileRequest;
+use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
@@ -21,11 +23,11 @@ class ProfileController extends Controller
                 Storage::disk('public')->delete($user->profile_image);
             }
             // storage/app/public/avatars に保存 -> DBには相対パスを保存
-            $data['profile_image'] = $request->file('image')->store('avatars', 'public');
+            $data['profile_image'] = $request->file('image')->store('profile_images', 'public');
         }
 
         $user->update($data);
 
-        return back()->with('success', 'プロフィールを更新しました。');
+        return redirect()->route('items.index')->with('success', 'プロフィールを更新しました。');
     }
 }

@@ -19,7 +19,7 @@ class ItemsTableSeeder extends Seeder
             'price' => 15000,
             'brand' => 'Rolax',
             'description' => 'スタイリッシュなデザインのメンズ腕時計',
-            'img_url' => 'https://coachtech-matter.s3.ap-northeast-1.amazonaws.com/1.png',
+            'img_url' => 'images/image_1.jpg',
             'condition' => '良好',
         ]);
 
@@ -28,7 +28,7 @@ class ItemsTableSeeder extends Seeder
             'price' => 5000,
             'brand' => '西芝',
             'description' => '高速で信頼性の高いハードディスク',
-            'img_url' => 'https://coachtech-matter.s3.ap-northeast-1.amazonaws.com/2.png',
+            'img_url' => 'images/image_2.jpg',
             'condition' => '目立った傷や汚れなし',
         ]);
 
@@ -37,7 +37,7 @@ class ItemsTableSeeder extends Seeder
             'price' => 300,
             'brand' => 'null',
             'description' => '新鮮な玉ねぎ３束のセット',
-            'img_url' => 'https://coachtech-matter.s3.ap-northeast-1.amazonaws.com/3.png',
+            'img_url' => 'images/image_3.jpg',
             'condition' => 'やや傷や汚れあり',
         ]);
 
@@ -46,7 +46,7 @@ class ItemsTableSeeder extends Seeder
             'price' => 4000,
             'brand' => 'null',
             'description' => 'クラシックなデザインの革靴',
-            'img_url' => 'https://coachtech-matter.s3.ap-northeast-1.amazonaws.com/4.png',
+            'img_url' => 'images/image_4.jpg',
             'condition' => '状態が悪い',
         ]);
 
@@ -55,7 +55,7 @@ class ItemsTableSeeder extends Seeder
             'price' => 45000,
             'brand' => 'null',
             'description' => '高性能なノートパソコン',
-            'img_url' => 'https://coachtech-matter.s3.ap-northeast-1.amazonaws.com/5.png',
+            'img_url' => 'images/image_5.jpg',
             'condition' => '良好',
         ]);
 
@@ -64,7 +64,7 @@ class ItemsTableSeeder extends Seeder
             'price' => 8000,
             'brand' => 'null',
             'description' => '高音質のレコーディング用マイク',
-            'img_url' => 'https://coachtech-matter.s3.ap-northeast-1.amazonaws.com/6.png',
+            'img_url' => 'images/image_6.jpg',
             'condition' => '目立った傷や汚れなし',
         ]);
 
@@ -73,7 +73,7 @@ class ItemsTableSeeder extends Seeder
             'price' => 3500,
             'brand' => 'null',
             'description' => 'おしゃれなショルダーバッグ',
-            'img_url' => 'https://coachtech-matter.s3.ap-northeast-1.amazonaws.com/7.png',
+            'img_url' => 'images/image_7.jpg',
             'condition' => 'やや傷や汚れあり',
         ]);
 
@@ -82,7 +82,7 @@ class ItemsTableSeeder extends Seeder
             'price' => 500,
             'brand' => 'null',
             'description' => '使いやすいタンブラー',
-            'img_url' => 'https://coachtech-matter.s3.ap-northeast-1.amazonaws.com/8.png',
+            'img_url' => 'images/image_8.jpg',
             'condition' => '状態が悪い',
         ]);
 
@@ -91,7 +91,7 @@ class ItemsTableSeeder extends Seeder
             'price' => 4000,
             'brand' => 'Starbacks',
             'description' => '手動のコーヒーミル',
-            'img_url' => 'https://coachtech-matter.s3.ap-northeast-1.amazonaws.com/9.png',
+            'img_url' => 'images/image_9.jpg',
             'condition' => '良好',
         ]);
 
@@ -100,7 +100,7 @@ class ItemsTableSeeder extends Seeder
             'price' => 2500,
             'brand' => 'null',
             'description' => '便利なメイクアップセット',
-            'img_url' => 'https://coachtech-matter.s3.ap-northeast-1.amazonaws.com/10.png',
+            'img_url' => 'images/image_10.jpg',
             'condition' => '目立った傷や汚れなし',
         ]);
     }

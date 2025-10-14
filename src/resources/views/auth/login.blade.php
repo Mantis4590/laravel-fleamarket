@@ -18,7 +18,7 @@
 
             <div class="login__group">
                 <label for="email" class="login__label">メールアドレス</label>
-                <input type="email" name="email" id="email" class="login__input">
+                <input type="text" name="email" id="email" class="login__input">
                 @error('email')
                 <p class="login__error">{{ $message }}</p>
                 @enderror

@@ -24,7 +24,7 @@
             </div>
             <div class="register__group">
                 <label for="email" class="register__label">メールアドレス</label>
-                <input type="email" name="email" id="email" class="register__input" value="{{ old('email') }}">
+                <input type="text" name="email" id="email" class="register__input" value="{{ old('email') }}">
                 @error('email')
                     <p class="register__error">{{ $message }}</p>
                 @enderror
@@ -39,7 +39,7 @@
             <div class="register__group">
                 <label for="password_confirmation" class="register__label">確認用パスワード</label>
                 <input type="password" name="password_confirmation" id="password_confirmation" class="register__input">
-                @error('name')
+                @error('password_confirmation')
                     <p class="register__error">{{ $message }}</p>
                 @enderror
             </div>

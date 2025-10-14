@@ -8,45 +8,44 @@
 </head>
 <body>
     <header class="header">
-        <div class="header__inner">
-            <div class="header__logo">
-                <img src="/logo.svg" alt="COACHTECHロゴ">
-            </div>
+        <img src="{{ asset('logo.svg') }}" alt="COACHTECHロゴ" class="header__logo">
 
-            <div class="header__search">
-                <input type="text" placeholder="なにをお探しですか？">
-            </div>
-
-            <nav class="header__nav">
-                <form action="{{ route('logout') }}" method="POST" class="header__logout-form">
-                    @csrf
-                    <button type="submit" class="header__link">ログアウト</button>
-                </form>
-                <a href="/mypage" class="header__link">マイページ</a>
-                <a href="#" class="header__button">出品</a>
-            </nav>
+        <div class="header__center">
+            <input type="text" class="header__search" placeholder="なにをお探しですか？">
         </div>
+
+        <nav class="header__nav">
+        <form action="{{ route('logout') }}" method="POST" class="header__logout-form">
+            @csrf
+            <button type="submit" class="header__link header__link--logout">ログアウト</button>
+        </form>
+
+        <a href="/mypage" class="header__link">マイページ</a>
+        <a href="#" class="header__button">出品</a>
+        </nav>
     </header>
 
     <main class="main">
-        <div class="product-tabs">
-            <a href="/?tab=recommend" class="product-tabs__link product-tabs__link--active">おすすめ</a>
-            <a href="/?tab=mylist" class="product-tabs__link">マイリスト</a>
+        <div class="tab">
+            <a href="{{ route('home', ['tab' => 'recommend']) }}" class="tab__item {{ request('tab', 'recommend') === 'recommend' ? 'tab__item--active' : '' }}">おすすめ</a>
+            <a href="{{ route('home', ['tab' => 'mylist']) }}" class="tab__item {{ request('tab') === 'mylist' ? 'tab__item--active' : '' }}">マイリスト</a>
         </div>
 
         {{-- 商品一覧 --}}
-        <section class="product-grid">
-            {{-- ここは仮で表示させてるだけ --}}
-            <div class="product-card">
-                <div class="product-card__image">商品画像</div>
-                <p class="product-card__name">商品名</p>
+        <section class="item-list">
+            @foreach ($items as $item)
+            <div class="item-card">
+                {{-- 画像ラッパとimgクラスは任意（見やすく） --}}
+                <div class="item-card__img">
+                    @if (!empty($item->img_url))
+                    <img src="{{ asset($item->img_url) }}" alt="{{ $item->name }}" class="item-card__image">
+                    @else
+                <div class="item-card__noimage">商品画像</div>
+                @endif
             </div>
-            <div class="product-card__image">商品画像</div>
-                <p class="product-card__name">商品名</p>
-            </div>
-            <div class="product-card__image">商品画像</div>
-                <p class="product-card__name">商品名</p>
-            </div>
+            <p class="item-card__name">{{ $item->name }}</p>
+        </div>
+        @endforeach
         </section>
     </main>
 </body>

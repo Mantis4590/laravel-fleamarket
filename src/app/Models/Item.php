@@ -17,4 +17,8 @@ class Item extends Model
         'img_url',
         'condition',
     ];
+
+    public function likedByUsers() {
+        return $this->belongsToMany(User::class, 'likes')->withTimestamps();
+    }
 }

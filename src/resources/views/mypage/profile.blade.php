@@ -23,7 +23,7 @@
     <main class="profile">
         <h1 class="profile__title">プロフィール設定</h1>
 
-        <form action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data" class="profile__form"></form>
+        <form action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data" class="profile__form">
         @csrf
 
         <div class="profile__image-area">
@@ -69,6 +69,7 @@
         </div>
 
         <button class="profile__button" type="submit">更新する</button>
+        </form>
     </main>
 </body>
 </html>
