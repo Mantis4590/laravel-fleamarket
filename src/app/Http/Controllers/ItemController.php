@@ -20,12 +20,22 @@ class ItemController extends Controller
             $items = Item::all();
         }
 
-        return view('index', compact('tab', 'items'));
+        return view('items.index', compact('tab', 'items'));
     }
 
     public function guestIndex() {
         $items = Item::all();
 
-        return view('index_guest', compact('items'));
+        return view('items.index_guest', compact('items'));
+    }
+
+    public function show($item_id) {
+        $item = Item::with(['category', 'comments.user', 'likes'])->findOrFail($item_id);
+
+        if (auth()->check()) {
+            return view('items.show', compact('item'));
+        } else {
+            return view('items.show_guest', compact('item'));
+        }
     }
 }

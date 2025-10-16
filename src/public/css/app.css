@@ -1,0 +1,443 @@
+/* ===============================
+   共通レイアウトベース
+   =============================== */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #fff;
+    color: #333;
+    font-family: 'Noto Sans JP', sans-serif;
+}
+
+/* ===============================
+   ヘッダー三分割構造
+   =============================== */
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #000;
+    padding: 10px 40px;
+    gap: 20px;
+}
+
+/* 左・中央・右をそれぞれ独立配置 */
+.header__left,
+.header__center,
+.header__right {
+    display: flex;
+    align-items: center;
+}
+
+/* 中央エリア（検索欄）を広げて真ん中に寄せる */
+.header__center {
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+/* ロゴ */
+.header__logo {
+    width: 150px;
+    flex-shrink: 0;
+}
+
+/* 検索欄 */
+.header__search {
+    width: 240px;
+    height: 34px;
+    border-radius: 4px;
+    border: none;
+    padding: 0 10px;
+    font-size: 14px;
+    max-width: 100%;
+}
+
+
+/* 右側ナビゲーション */
+.header__right .header__nav {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+/* 通常リンク */
+.header__link {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 14px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.header__link:hover {
+    text-decoration: underline;
+}
+
+/* ログアウトボタン */
+.header__link--logout {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 14px;
+    cursor: pointer;
+    text-decoration: none;
+    font-family: inherit;
+    padding: 0;
+}
+
+/* 出品ボタン */
+.header__button {
+    background-color: #fff;
+    color: #000;
+    font-weight: bold;
+    border: 1px solid #000;
+    border-radius: 4px;
+    padding: 6px 14px;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.header__button:hover {
+    background-color: #000;
+    color: #fff;
+}
+
+/* ===============================
+   共通フォームスタイル
+   =============================== */
+input[type="text"],
+input[type="password"],
+input[type="email"],
+textarea {
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    height: 38px;
+    padding: 0 10px;
+    font-size: 14px;
+    transition: border-color 0.3s;
+    box-sizing: border-box;
+}
+
+input:focus,
+textarea:focus {
+    border-color: #ff6b6b;
+    outline: none;
+}
+
+/* ===============================
+   共通ボタン
+   =============================== */
+.button--primary {
+    background-color: #ff5555;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 12px 0;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.button--primary:hover {
+    background-color: #ff6b6b;
+}
+
+/* ===============================
+   タブ共通（index系）
+   =============================== */
+.tab {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 30px;
+}
+
+.tab__item {
+    padding: 10px 20px;
+    font-weight: bold;
+    color: #666;
+    text-decoration: none;
+    border-bottom: 2px solid transparent;
+    transition: color 0.3s, border-bottom 0.3s;
+}
+
+.tab__item:hover {
+    color: #000;
+}
+
+.tab__item--active {
+    color: #ff4d4d;
+    border-bottom: 2px solid #ff4d4d;
+}
+
+/* ===============================
+   商品カード共通（index, guestなど）
+   =============================== */
+.item-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 40px;
+    width: 90%;
+    max-width: 1000px;
+    margin: 40px auto;
+}
+
+.item-card {
+    text-align: center;
+    background: #f7f7f7;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+}
+
+.item-card:hover {
+    transform: scale(1.03);
+}
+
+.item-card__img {
+    width: 100%;
+    aspect-ratio: 1/1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px 8px 0 0;
+    overflow: hidden;
+}
+
+.item-card__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: 8px 8px 0 0;
+}
+
+.item-card__name {
+    margin: 10px 0;
+    font-size: 14px;
+}
+
+/* ===============================
+   共通メイン余白
+   =============================== */
+.main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 16px;
+}
+
+/* ===============================
+   商品詳細ページ共通 (show, show_guest)
+   =============================== */
+
+/* 商品詳細メイン構造 */
+.item-detail__container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 60px;
+    max-width: 1000px;
+    margin: 40px auto;
+}
+
+/* 左カラム : 画像エリア */
+.item-detail__image-area {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.item-detail__image {
+    width: 400px;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+}
+
+/* 右カラム : 商品情報 */
+.item-detail__info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.item-detail__name {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.item-detail__brand {
+    color: #777;
+    font-size: 14px;
+}
+
+.item-detail__price {
+    font-size: 18px;
+    margin: 8px 0;
+}
+
+.item-detail__tax {
+    font-size: 12px;
+    color: #777;
+}
+
+/* ===============================
+   アクションボタン類（いいね・コメント）
+   =============================== */
+
+.item-detail__actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.item-detail__icon {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    padding: 0;
+    color: #333;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    text-decoration: none;
+}
+
+.item-detail__icon--liked {
+    color: #ff5656;
+}
+
+.item-detail__icon--comment {
+    color: #555;
+}
+
+.item-detail__icon:hover {
+    opacity: 0.7;
+}
+
+.item-detail__icon span {
+    font-size: 14px;
+    margin-left: 2px;
+}
+
+/* ===============================
+   購入ボタン
+   =============================== */
+.item-detail__purchase-btn {
+    display: block;
+    width: 100%;
+    background-color: #ff5555;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 0;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.item-detail__purchase-btn:hover {
+    background-color: #ff6b6b;
+}
+
+/* ===============================
+   商品説明・情報
+   =============================== */
+.item-detail__section {
+    margin-top: 24px;
+}
+
+.item-detail__subtitle {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.item-detail__description {
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+/* ===============================
+   コメント欄
+   =============================== */
+.item-detail__comment {
+    margin-bottom: 16px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 8px;
+}
+
+.item-detail__comment-user {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 4px;
+}
+
+.item-detail__comment-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.item-detail__comment-text {
+    font-size: 14px;
+    color: #333;
+}
+
+.item-detail__textarea-message {
+    font-size: 15px;
+    font-weight: bold;
+    margin-top: 12px;
+}
+
+.item-detail__textarea {
+    height: 150px;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+    padding: 8px;
+    font-size: 14px;
+    font-family: inherit;
+    box-sizing: border-box;
+}
+
+.item-detail__button {
+    display: block;
+    width: 100%;
+    background-color: #ff5555;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 0;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    text-decoration: none;
+    text-align: center;
+}
+
+.item-detail__button:hover {
+    background-color: #ff6b6b;
+}

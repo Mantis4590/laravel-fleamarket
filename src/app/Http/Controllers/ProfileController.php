@@ -28,6 +28,6 @@ class ProfileController extends Controller
 
         $user->update($data);
 
-        return redirect()->route('items.index')->with('success', 'プロフィールを更新しました。');
+        return redirect()->route('home')->with('success', 'プロフィールを更新しました。');
     }
 }
