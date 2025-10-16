@@ -8,6 +8,8 @@ use App\Http\Controllers\ItemController;
 use App\Http\Controllers\Auth\CustomAuthenticatedSessionController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use App\Http\Controllers\CommentController;
+use App\Http\Controllers\LikeController;
 
 
 Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
@@ -20,23 +22,38 @@ Route::post('/login', [CustomAuthenticatedSessionController::class, 'store'])->n
 
 Route::middleware('auth')->group(function () {
     Route::get('/mypage/profile', [ProfileController::class, 'show'])->name('profile.show');
+    Route::post('/item/{item_id}/like', [LikeController::class, 'store'])->name('like.store');
+    Route::delete('/item/{item_id}/like', [LikeController::class, 'destroy'])->name('like.destroy');
     Route::post('/mypage/profile', [ProfileController::class, 'update'])->name('profile.update');
 });
 
 
-// 共通（ゲスト表示）
+// ==============================
+// ゲスト表示
+// ==============================
 Route::get('/guest', [ItemController::class, 'guestIndex'])->name('items.guest');
+Route::get('/item/{item_id}', [ItemController::class, 'show'])->name('item.show');
 
-// 商品一覧（ログイン時のみ）
-Route::middleware('auth')->group(function () {
-    Route::get('/', [ItemController::class, 'index'])->name('items.index');
-});
+// ==============================
+// ログイン後の商品一覧
+// ==============================
+Route::get('/home', [ItemController::class, 'index'])->name('home');
+Route::get('/', [ItemController::class, 'index'])->name('items.index');
 
-// トップへのアクセスを自動振り分け（オプション）
+// ==============================
+// トップアクセス時にログイン状態で振り分け
+// ==============================
 Route::get('/', function (Request $request) {
     if (Auth::check()) {
-        return redirect()->route('items.index');
+        return redirect()->route('home');
     } else {
         return redirect()->route('items.guest');
     }
 });
+
+Route::get('/item/{item_id}', [ItemController::class, 'show'])->name('item.show');
+Route::post('/item/{item_id}/comment', [CommentController::class, 'store'])
+->middleware('auth')
+->name('comment.store');
+Route::post('/item/{item_id}/like', [LikeController::class, 'store'])->name('like.store');
+Route::delete('/item/{item_id}/like', [LikeController::class, 'destroy'])->name('like.destroy');

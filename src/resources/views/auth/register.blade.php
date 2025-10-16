@@ -1,17 +1,19 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>会員登録画面</title>
-    <link rel="stylesheet" href="{{ asset('css/register.css') }}">
-</head>
-<body>
+@extends('layouts.app')
+
+@section('title', '会員登録画面')
+
+@section('css')
+<link rel="stylesheet" href="{{ asset('css/register.css') }}">
+@endsection
+
+@section('header')
     <header class="header">
         <img src="{{ asset('logo.svg') }}" alt="COACHTECHロゴ" class="header__logo">
     </header>
+@endsection
 
-    <main class="register">
+@section('content')
+    <section class="register">
         <h1 class="register__title">会員登録</h1>
         <form action="{{ route('register') }}" method="POST" class="register__form">
             @csrf
@@ -50,6 +52,5 @@
         <p class="register__link">
             <a href="{{ route('login') }}">ログインはこちら</a>
         </p>
-    </main>
-</body>
-</html>
+    </section>
+@endsection
