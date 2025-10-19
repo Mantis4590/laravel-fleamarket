@@ -1,0 +1,110 @@
+.mypage__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+    
+}
+
+.mypage__icon {
+    width: 120px;
+    /* 横幅を固定 */
+    height: 120px;
+    /* 縦幅を固定 */
+    border-radius: 50%;
+    /* 丸くする */
+    object-fit: cover;
+    /* 中央でトリミングして綺麗に見せる */
+    margin-right: 8px;
+    /* 名前との間に少し余白 */
+    vertical-align: middle;
+    margin-left: 150px;
+    }
+
+.mypage__profile {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    
+}
+
+.mypage__name {
+    margin-left: 50px;
+}
+
+.mypage__edit-btn {
+    margin-right: 250px;
+
+    
+}
+
+.mypage__tab:hover {
+    
+}
+
+.mypage__edit-btn {
+    color: #ff4d4d;
+    border: 1px solid #ff4d4d;
+    text-decoration: none;
+    border-radius: 5px;
+    padding: 6px 20px;
+    
+}
+
+.mypage__tab {
+    text-decoration: none;
+    padding: 10px 20px;
+    color: #000;
+    transition: color 0.2s, border-bottom 0.2s;
+}
+
+.mypage__tabs {
+    display: flex;
+    justify-content: left;
+    border-bottom: 1px solid #000;
+    margin-top: 20px;
+
+}
+
+.mypage__tab--active {
+    color: #ff4d4d;
+}
+
+/* ===============================
+   商品リスト部分
+   =============================== */
+.mypage__item-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 40px;
+    margin: 40px auto;
+    width: 90%;
+    max-width: 1000px;
+}
+
+/* 商品カード */
+.mypage__item-card {
+    text-align: center;
+}
+
+.mypage__item-img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    background-color: #f7f7f7;
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.mypage__item-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.mypage__item-name {
+    margin-top: 8px;
+    font-size: 14px;
+}
