@@ -8,20 +8,34 @@ use App\Models\Item;
 
 class ItemController extends Controller
 {
-    public function index(Request $request) {
-        // クエリパラメータでタブ状態を判定
-        $tab = $request->query('tab', 'recommend'); // デフォルトはおすすめ
+    public function index(Request $request)
+{
+    $tab = $request->query('tab', 'recommend');
+    $keyword = $request->input('keyword'); // 検索ワードを取得
 
-        if ($tab === 'mylist' && auth()->check()) {
-            // ログイン中の「いいね」した商品だけ取得
-            $items = auth()->user()->likedItems()->get();
+    if ($tab === 'mylist') {
+        if (Auth::check()) {
+            $query = Item::whereHas('likes', function ($likeQuery) {
+                $likeQuery->where('user_id', Auth::id());
+            });
         } else {
-            // おすすめタグ(または未ログイン)
-            $items = Item::all();
+            $items = collect();
+            return view('items.index', compact('tab', 'items'));
         }
-
-        return view('items.index', compact('tab', 'items'));
+    } else {
+        $query = Item::query();
     }
+
+    // 🔍 部分一致検索
+    if ($keyword) {
+        $query->where('name', 'like', "%{$keyword}%");
+    }
+
+    $items = $query->get();
+
+    return view('items.index', compact('tab', 'items'));
+}
+
 
     public function guestIndex() {
         $items = Item::all();
@@ -30,7 +44,7 @@ class ItemController extends Controller
     }
 
     public function show($item_id) {
-        $item = Item::with(['category', 'comments.user', 'likes'])->findOrFail($item_id);
+        $item = Item::with(['categories', 'comments.user', 'likes'])->findOrFail($item_id);
 
         if (auth()->check()) {
             return view('items.show', compact('item'));

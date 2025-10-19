@@ -1,36 +1,17 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>商品一覧(ゲスト)</title>
-    <link rel="stylesheet" href="{{ asset('css/index.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/index_guest.css') }}">
+@extends('layouts.app')
 
-</head>
-<body>
-    <header class="header">
-        <img src="{{ asset('logo.svg') }}" alt="COACHTECHロゴ" class="header__logo">
+@section('title', 'ゲスト用商品一覧')
+@section('css')
+<link rel="stylesheet" href="{{ asset('css/index_guest.css') }}">
+@endsection
 
-        <div class="header__center">
-            <input type="text" class="header__search" placeholder="なにをお探しですか？">
-        </div>
-
-        <nav class="header__nav">
-        <a href="{{ route('login') }}" class="header__link header__link--login">ログイン</a>
-        <a href="/mypage" class="header__link">マイページ</a>
-            <a href="#" class="header__button">出品</a>
-        </nav>
-
-    </header>
-
-    <div class="tab">
-        <a href="{{ route('items.guest') }}" class="tab__item {{ request('tab', 'recommend') === 'recommend' ? 'tab__item--active' : '' }}">おすすめ</a>
-        <a href="#" class="tab__item {{ request('tab') === 'mylist' ? 'tab__item--active' : '' }}">マイリスト</a>
-    </div>
-
+@section('content')
     {{-- 商品一覧 --}}
     <main class="product-list">
+        <div class="tab">
+            <a href="{{ route('home', ['tab' => 'recommend']) }}" class="tab__item {{ request('tab', 'recommend') === 'recommend' ? 'tab__item--active' : '' }}">おすすめ</a>
+            <a href="{{ route('home', ['tab' => 'mylist']) }}" class="tab__item {{ request('tab') === 'mylist' ? 'tab__item--active' : '' }}">マイリスト</a>
+        </div>
         {{-- 商品一覧 --}}
         <section class="item-list">
             @foreach ($items as $item)
@@ -51,5 +32,4 @@
         @endforeach
         </section>
     </main>
-</body>
-</html>
+@endsection

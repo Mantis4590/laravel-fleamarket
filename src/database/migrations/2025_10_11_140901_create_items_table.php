@@ -15,6 +15,7 @@ class CreateItemsTable extends Migration
     {
         Schema::create('items', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->string('name');
             $table->integer('price');
             $table->string('brand')->nullable();
@@ -22,7 +23,6 @@ class CreateItemsTable extends Migration
             $table->string('img_url');
             $table->string('condition');
             $table->timestamps();
-            $table->foreignId('category_id')->constrained('categories')->onDelete('cascade');
         });
     }
 

@@ -1,24 +1,13 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>プロフィール設定</title>
-    <link rel="stylesheet" href="{{ asset('css/profile.css') }}">
-</head>
-<body>
-    <header class="header">
-        <img src="{{ asset('logo.svg') }}" alt="COACHTECHロゴ" class="header__logo">
-        <nav class="header__nav">
-            <input type="text" class="header__search" placeholder="なにをお探しですか？">
-            <form action="{{ route('logout') }}" method="POST" class="header__logout-form">
-                @csrf
-                <button type="submit" class="header__link">ログアウト</button>
-            </form>
-            <a href="/mypage" class="header__link">マイページ</a>
-            <a href="#" class="header__button">出品</a>
-        </nav>
-    </header>
+@extends('layouts.app')
+
+@section('title', 'プロフィール編集')
+
+@section('css')
+<link rel="stylesheet" href="{{ asset('css/profile.css') }}">
+
+@endsection
+
+@section('content')
 
     <main class="profile">
         <h1 class="profile__title">プロフィール設定</h1>
@@ -71,5 +60,4 @@
         <button class="profile__button" type="submit">更新する</button>
         </form>
     </main>
-</body>
-</html>
+@endsection

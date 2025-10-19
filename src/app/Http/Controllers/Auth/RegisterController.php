@@ -30,7 +30,10 @@ class RegisterController extends Controller
         // 登録したユーザーでログイン状態にする
         auth()->login($user);
 
-        // 登録後はプロフィール設定ページへリダイレクト
+        // 初回登録時のフラグ
+        session(['from_register' => true]);
+
+        // 登録後はプロフィール編集画面へリダイレクト
         return redirect('/mypage/profile');
     }
 }

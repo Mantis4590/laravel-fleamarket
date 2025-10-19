@@ -16,7 +16,7 @@
             {{-- 右カラム : 商品情報 --}}
             <div class="item-detail__info">
                 <h2 class="item-detail__name">{{ $item->name }}</h2>
-                <p class="item-detail__brand">{{ $item->brand ?? 'ブランド名' }}</p>
+                <p>ブランド: {{ $item->brand ?: '無し' }}</p>
                 <p class="item-detail__price">¥{{ number_format($item->price) }} <span class="item-detail__tax">(税込)</span></p>
 
                 @php
@@ -50,7 +50,18 @@
 
                 <section class="item-detail__section">
                     <h3 class="item-detail__subtitle">商品の情報</h3>
-                    <p>カテゴリー: {{ optional($item->category)->name ?? '未設定' }}</p>
+
+                    @if ($item->categories->isNotEmpty())
+                        <p>
+                            カテゴリー: 
+                            @foreach ($item->categories as $category)
+                            {{ $category->name }}@if (!$loop->last), @endif
+                            @endforeach
+                        </p>
+                    @else
+                        <p>カテゴリー: 未設定</p>
+                    @endif
+
                     <p>商品の状態: {{ $item->condition ?? '良好' }}</p>
                 </section>
 

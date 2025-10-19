@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\ProfileRequest;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
 {
@@ -13,21 +14,29 @@ class ProfileController extends Controller
         return view('mypage.profile', compact('user'));
     }
 
-    public function update(ProfileRequest $request) {
-        $user = auth()->user();
+    // プロフィール更新処理
+    public function update(ProfileRequest $request)
+    {
+        $user = Auth::user();
         $data = $request->only(['name', 'postcode', 'address', 'building']);
 
+        // 新しい画像があれば更新
         if ($request->hasFile('image')) {
-            // 既存画像があれば削除
             if ($user->profile_image) {
                 Storage::disk('public')->delete($user->profile_image);
             }
-            // storage/app/public/avatars に保存 -> DBには相対パスを保存
+
             $data['profile_image'] = $request->file('image')->store('profile_images', 'public');
         }
 
         $user->update($data);
 
-        return redirect()->route('home')->with('success', 'プロフィールを更新しました。');
+        // 条件でリダイレクト先を分ける
+        if (session('from_register')) {
+            session()->forget('from_register');
+            return redirect()->route('home')->with('success', 'プロフィールを更新しました');
+        }
+
+        return redirect()->route('mypage.index')->with('success', 'プロフィールを更新しました。');
     }
 }
