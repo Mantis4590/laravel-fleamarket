@@ -33,11 +33,12 @@
         @foreach($items as $item)
             <div class="mypage__item-card">
                 <div class="mypage__item-img">
-                    @if($item->img_url)
-                        <img src="{{ asset($item->img_url) }}" alt="{{ $item->name }}" class="mypage__item-image">
+                    @if (!empty($item->img_url))
+                        <img src="{{ asset('storage/' . $item->img_url) }}" alt="{{ $item->name }}" class="item-card__image">
                     @else
-                        <div class="mypage__item-noimage">商品画像</div>
+                        <div class="item-card__noimage">商品画像</div>
                     @endif
+
                 </div>
                 <p class="mypage__item-name">{{ $item->name }}</p>
             </div>

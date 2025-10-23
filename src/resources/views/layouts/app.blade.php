@@ -37,11 +37,11 @@
                     <button type="submit" class="header__link header__link--logout">ログアウト</button>
                 </form>
                 <a href="{{ route('mypage.index') }}" class="header__link">マイページ</a>
-                <a href="#" class="header__button">出品</a>
+                <a href="{{ route('items.create') }}" class="header__button">出品</a>
             @else
                 <a href="{{ route('login') }}" class="header__link header__link--login">ログイン</a>
                 <a href="/mypage" class="header__link">マイページ</a>
-                <a href="#" class="header__button">出品</a>
+                <a href="{{ route('login') }}" class="header__button">出品</a>
             @endauth
         </nav>
     </div>

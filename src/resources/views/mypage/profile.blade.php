@@ -16,7 +16,8 @@
         @csrf
 
         <div class="profile__image-area">
-            @if(!empty($user->profile_image))
+            <div class="profile__image-area__top">
+                @if(!empty($user->profile_image))
                 <img src="{{ asset('storage/'.$user->profile_image) }}" alt="プロフィール画像" class="profile__image">
             @else
                 <div class="profile__image-circle"></div>
@@ -26,7 +27,9 @@
             <input type="file" name="image" id="image" class="profile__input-file" hidden>
             @error('image') <p class="profile__error">{{ $message }}</p>
             @enderror
-        </div>
+                </div>
+            </div>
+            
 
         <div class="profile__group">
             <label for="name" class="profile__label">ユーザー名</label>

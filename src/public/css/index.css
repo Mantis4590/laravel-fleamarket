@@ -83,3 +83,15 @@ body {
     border-bottom: 2px solid #ff4d4d;
     /* 下線赤 */
 }
+
+.item-card__sold {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    padding: 4px 8px;
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 4px;
+}

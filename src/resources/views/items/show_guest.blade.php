@@ -9,8 +9,13 @@
     <main class="item-detail">
         <div class="item-detail__container">
             <div class="item-detail__image-area">
-                <img src="{{ asset($item->img_url) }}" alt="{{ $item->name }}" class="item-detail__image">
+                @if (!empty($item->img_url))
+                    <img src="{{ asset('storage/' . $item->img_url) }}" alt="{{ $item->name }}" class="item-detail__image">
+                @else
+                    <div class="item-detail__noimage">商品画像</div>
+                @endif
             </div>
+
 
             <div class="item-detail__info">
                 <h2 class="item-detail__name">{{ $item->name }}</h2>
@@ -22,7 +27,7 @@
                     <a href="{{ route('login') }}" class="item-detail__icon">💬 <span>{{ $item->comments->count() }}</span></a>
                 </div>
 
-                <button class="item-detail__purchase-btn">購入手続きへ</button>
+                <a href="{{ route('login') }}" class="item-detail__purchase-btn">購入手続きへ</a>
 
                 <section class="item-detail__section">
                     <h3 class="item-detail__subtitle">商品説明</h3>

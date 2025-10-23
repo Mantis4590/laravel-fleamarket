@@ -16,6 +16,7 @@ class Item extends Model
         'description',
         'img_url',
         'condition',
+        'user_id',
     ];
 
     public function likedByUsers() {

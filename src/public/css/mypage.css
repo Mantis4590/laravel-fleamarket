@@ -7,9 +7,9 @@
 }
 
 .mypage__icon {
-    width: 120px;
+    width: 110px;
     /* 横幅を固定 */
-    height: 120px;
+    height: 110px;
     /* 縦幅を固定 */
     border-radius: 50%;
     /* 丸くする */
@@ -49,6 +49,11 @@
     border-radius: 5px;
     padding: 6px 20px;
     
+
+}
+
+.mypage__wrapper {
+    width: 100%;
 }
 
 .mypage__tab {
@@ -63,6 +68,8 @@
     justify-content: left;
     border-bottom: 1px solid #000;
     margin-top: 20px;
+    width: 100%;
+    
 
 }
 
@@ -108,3 +115,4 @@
     margin-top: 8px;
     font-size: 14px;
 }
+

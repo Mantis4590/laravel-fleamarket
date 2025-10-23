@@ -11,6 +11,7 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\MyPageController;
 use Illuminate\Http\Request;
+use App\Http\Controllers\PurchaseController;
 
 // ==============================
 // トップアクセス時（ログイン状態で振り分け）
@@ -51,4 +52,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/mypage', [MyPageController::class, 'index'])->name('mypage.index');
     Route::get('/mypage/profile', [ProfileController::class, 'show'])->name('profile.edit');
     Route::post('/mypage/profile', [ProfileController::class, 'update'])->name('profile.update');
+    // 購入画面
+    Route::get('/purchase/{item_id}',[PurchaseController::class, 'show'])->name('purchase.show');
+    Route::post('/purchase/{item_id}', [PurchaseController::class, 'store'])->name('purchase.store');
+
 });
+
+// 出品画面
+Route::get('/sell', [ItemController::class, 'create'])->name('items.create');
+Route::post('/sell', [ItemController::class, 'store'])->name('items.store');

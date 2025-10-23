@@ -10,8 +10,20 @@
         <div class="item-detail__container">
             {{-- 左カラム : 商品画像 --}}
             <div class="item-detail__image-area">
-                <img src="{{ asset($item->img_url) }}" alt="{{ $item->name }}" class="item-detail__image">
+                @if (!empty($item->img_url))
+                    <img src="{{ asset('storage/' . $item->img_url) }}" alt="{{ $item->name }}" class="item-detail__image">
+                @else
+                    <div class="item-detail__noimage">商品画像</div>
+                @endif
+
+                @if ($item->buyer_id)
+                    <p class="item-detail__sold">SOLD</p>
+                @else
+                    <a href="{{ route('purchase.show', ['item_id' => $item->id]) }}" class="item-detail__purchase-btn">購入手続きへ
+                    </a>
+                @endif
             </div>
+
 
             {{-- 右カラム : 商品情報 --}}
             <div class="item-detail__info">
@@ -41,7 +53,10 @@
                     <span class="item-detail__icon item-detail__icon--comment">💬 <span>{{ $item->comments->count() }}</span></span>
                 </div>
 
-                <button class="item-detail__purchase-btn">購入手続きへ</button>
+                <a href="{{ route('purchase.show', ['item_id' => $item->id]) }}" class="item-detail__purchase-btn">
+                購入手続きへ
+                </a>
+
 
                 <section class="item-detail__section">
                     <h3 class="item-detail__subtitle">商品説明</h3>

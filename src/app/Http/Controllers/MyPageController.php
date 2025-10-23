@@ -16,7 +16,7 @@ class MyPageController extends Controller
             $items = Item::where('user_id', $user->id)->get();
         }
         elseif ($page === 'buy') {
-            $items = collect();
+            $items = Item::where('buyer_id', $user->id)->latest()->get();
         }
 
         return view('mypage.mypage', compact('user', 'items', 'page'));

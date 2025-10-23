@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Item;
+use App\Http\Requests\ExhibitionRequest;
+use App\Models\Category;
 
 class ItemController extends Controller
 {
@@ -51,5 +53,31 @@ class ItemController extends Controller
         } else {
             return view('items.show_guest', compact('item'));
         }
+    }
+
+    public function store(ExhibitionRequest $request) {
+        // validated() で安全なデータのみ取得
+        $validated = $request->validated();
+
+        $path = $request->file('img_url')->store('images', 'public');
+
+        $item = Item::create([
+            'user_id' => auth()->id(),
+            'name' => $validated['name'],
+            'brand' => $request->brand,
+            'description' => $validated['description'],
+            'price' => $validated['price'],
+            'condition' => $validated['condition'],
+            'img_url' => $path,
+        ]);
+
+        $item->categories()->attach($validated['category_ids']);
+
+        return redirect()->route('home')->with('success', '商品を出品しました！');
+    }
+
+    public function create() {
+        $categories = Category::all();
+        return view('items.sell', compact('categories'));
     }
 }

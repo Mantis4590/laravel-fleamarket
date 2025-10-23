@@ -13,7 +13,7 @@ body {
    =============================== */
 .profile {
     max-width: 480px;
-    margin: 60px auto;
+    margin: 0 auto;
     padding: 0 16px;
 }
 
@@ -34,6 +34,12 @@ body {
     justify-content: flex-start;
 }
 
+.profile__image-area__top {
+    display: flex;
+    gap: 60px;
+    justify-content: center;
+}
+
 .profile__image {
     width: 120px;
     height: 120px;
@@ -51,15 +57,23 @@ body {
 }
 
 .profile__image-button {
-    display: inline-block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 150px;
+    /* ← 横幅を少し細めに */
+    height: 50px;
+    /* ← 縦を広めにして長方形に */
     color: #f08080;
     border: 1px solid #f08080;
-    border-radius: 4px;
-    padding: 6px 12px;
-    font-size: 13px;
-    cursor: pointer;
+    border-radius: 6px;
     background-color: #fff;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
     transition: 0.3s;
+    margin-top: 30px;
+    padding: 20px 4px;
 }
 
 .profile__image-button:hover {
