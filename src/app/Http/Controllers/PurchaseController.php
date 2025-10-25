@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Item;
 use App\Http\Requests\PurchaseRequest;
+use App\Http\Requests\AddressRequest;
 
 class PurchaseController extends Controller
 {
@@ -33,5 +34,26 @@ class PurchaseController extends Controller
         $item->save();
 
         return redirect()->route('home')->with('success', '購入が完了しました！');
+    }
+
+    // 表示用
+    public function editAddress($item_id) {
+        $item = Item::findOrFail($item_id);
+        $user = auth()->user();
+        return view('purchase.address', compact('item', 'user'));
+    }
+
+    // 更新処理用
+    public function updateAddress(AddressRequest $request, $item_id) {
+        $validated = $request->validated();
+        $user = auth()->user();
+
+        $user->update([
+            'postcode' => $validated['postcode'],
+            'address' => $validated['address'],
+            'building' => $request->input('building'),
+        ]);
+
+        return redirect()->route('purchase.show', ['item_id' => $item_id])->with('success', '住所を更新しました');
     }
 }

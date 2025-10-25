@@ -28,7 +28,7 @@
                 @csrf
                 <div class="purchase__section">
                     <h3 class="purchase__title">お支払い方法</h3>
-                    <select name="payment_method" class="purchase__select" onchange="this.form.submit()">
+                    <select name="payment_method" class="purchase__select">
                         <option value="選択してください"></option>
                         <option value="コンビニ払い" {{ old('payment_method') === 'コンビニ払い' ? 'selected' : '' }}>コンビニ払い</option>
                         <option value="カード払い" {{ old('payment_method') === 'カード払い' ? 'selected' : '' }}>カード払い</option>
@@ -44,7 +44,7 @@
                     <div class="purchase__address">
                         <p>〒 {{ $user->postcode }}</p>
                         <p>{{ $user->address }}</p>
-                        <a href="{{ route('profile.edit') }}" class="purchase__change-like">変更する</a>
+                        <a href="{{ route('purchase.address.edit', ['item_id' => $item->id]) }}" class="purchase__change-like">変更する</a>
                     </div>
                     @error('address')
                         <p class="purchase__error">{{ $message }}</p>

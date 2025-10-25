@@ -61,3 +61,9 @@ Route::middleware('auth')->group(function () {
 // 出品画面
 Route::get('/sell', [ItemController::class, 'create'])->name('items.create');
 Route::post('/sell', [ItemController::class, 'store'])->name('items.store');
+
+
+// 送り先住所変更画面
+Route::get('/purchase/address/{item_id}', [PurchaseController::class, 'editAddress'])->name('purchase.address.edit');
+
+Route::post('/purchase/address/{item_id}', [PurchaseController::class, 'updateAddress'])->name('purchase.address.update');
