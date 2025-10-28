@@ -12,29 +12,42 @@ class PurchaseController extends Controller
     public function show($item_id) {
         $item = Item::findOrFail($item_id);
         $user = auth()->user();
-        return view('purchase', compact('item', 'user'));
+        return view('purchase.purchase', compact('item', 'user'));
     }
 
+    
     public function store(PurchaseRequest $request, $item_id) {
-        $item = Item::findOrFail($item_id);
-        $user = auth()->user();
 
-        // 住所が未登録ならエラー返す
-        if (empty($user->address) || empty($user->postcode)) {
-            return back()->with('error', 'プロフィールに配送先住所を登録してください');
-        }
+    $item = Item::findOrFail($item_id);
+    $user = auth()->user();
 
-        // すでに購入済みなら何もしない
-        if ($item->buyer_id) {
-            return redirect()->route('home')->with('error', 'この商品はすでに購入されています');
-        }
+    // バリデーション済みデータ
+    $validated = $request->validated();
+    $payment_method = $validated['payment_method'];
 
-        // ログイン中のユーザーを購入者として登録
-        $item->buyer_id = auth()->id();
-        $item->save();
-
-        return redirect()->route('home')->with('success', '購入が完了しました！');
+    // 住所が未登録ならエラー返す
+    if (empty($user->address) || empty($user->postcode)) {
+        return back()->with('error', 'プロフィールに配送先住所を登録してください');
     }
+
+    // 購入済みチェック
+    if ($item->buyer_id) {
+        return redirect()->route('home')->with('error', 'この商品はすでに購入されています');
+    }
+
+    // buyer_id 登録
+    $item->buyer_id = auth()->id();
+    $item->save();
+
+    // ← 一旦リダイレクトせずに purchase ページを再表示
+    return view('purchase.purchase', [
+        'item' => $item,
+        'user' => $user,
+        'payment_method' => $payment_method, // ← 渡す
+    ]);
+}
+
+
 
     // 表示用
     public function editAddress($item_id) {
