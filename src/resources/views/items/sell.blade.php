@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('css')
+<link rel="stylesheet" href="{{ asset('css/sell.css') }}">
+@endsection
+
 @section('content')
 <div class="exhibition">
     <h2 class="exhibition_title">商品の出品</h2>
@@ -29,20 +33,24 @@
         </section>
 
         {{-- 商品の詳細 --}}
-        <section class="exhibiton__section">
-            <h3 class="exhibition__subtitle">商品の詳細</h3>
+        <section class="exhibition__section">
+            <div class="exhibition__section-border">
+                <h3 class="exhibition__subtitle">商品の詳細</h3>
+            </div>
+            
 
             {{-- カテゴリー --}}
             <div class="exhibition__group">
                 <p class="exhibition__label">カテゴリー</p>
                 <div class="exhibition__categories">
                     @foreach ($categories as $category)
-                        <label for="" class="exhibition__category">
-                            <input type="checkbox" name="category_ids[]" value="{{ $category->id }}"
-                            {{ in_array($category->id, old('category_ids', [])) ? 'checked' : '' }}>
+                        <label for="category_{{ $category->id }}" class="exhibition__category">
+                            <input type="checkbox" id="category_{{ $category->id }}" name="category_ids[]" value="{{ $category->id }}"
+                                {{ in_array($category->id, old('category_ids', [])) ? 'checked' : '' }}>
                             <span>{{ $category->name }}</span>
                         </label>
                     @endforeach
+
                 </div>
                 @error('category/ids')
                     <p class="exhibition__error">{{ $message }}</p>
@@ -67,7 +75,10 @@
 
         {{-- 商品名と説明 --}}
         <section class="exhibition__section">
-            <h3 class="exhibition__subtitle">商品名と説明</h3>
+            <div class="exhibition__section-border">
+                <h3 class="exhibition__subtitle">商品名と説明</h3>
+            </div>
+            
 
             <div class="exhibition__group">
                 <label for="name" class="exhibition__label">商品名</label>

@@ -8,10 +8,9 @@
 
 @section('content')
 <main class="purchase">
-    {{-- formは全体を包む --}}
+    {{-- formをここで1つだけ開く --}}
     <form action="{{ route('purchase.store', ['item_id' => $item->id]) }}" method="POST" class="purchase__container">
         @csrf
-
         {{-- 左側:商品情報 --}}
         <div class="purchase__left">
             <div class="purchase__item">
@@ -47,9 +46,6 @@
                     <p>{{ $user->address }}</p>
                     <a href="{{ route('purchase.address.edit', ['item_id' => $item->id]) }}" class="purchase__change-like">変更する</a>
                 </div>
-                @error('address')
-                    <p class="purchase__error">{{ $message }}</p>
-                @enderror
             </div>
         </div>
 
@@ -62,7 +58,7 @@
                 </tr>
                 <tr>
                     <th>お支払い方法</th>
-                    <td>{{ old('payment_method') ?: '未設定' }}</td>
+                    <td>{{ old('payment_method') ?? '未設定' }}</td>
                 </tr>
             </table>
             <button type="submit" class="purchase__button">購入する</button>

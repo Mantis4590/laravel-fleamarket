@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('css')
+<link rel="stylesheet" href="{{ asset('css/address.css') }}">
+@endsection
+
 @section('content')
 <div class="address">
     <h2 class="address__title">住所の変更</h2>

@@ -16,11 +16,9 @@
                     <div class="item-detail__noimage">商品画像</div>
                 @endif
 
+                {{-- SOLD表示だけ（未購入なら何も表示しない） --}}
                 @if ($item->buyer_id)
                     <p class="item-detail__sold">SOLD</p>
-                @else
-                    <a href="{{ route('purchase.show', ['item_id' => $item->id]) }}" class="item-detail__purchase-btn">購入手続きへ
-                    </a>
                 @endif
             </div>
 
