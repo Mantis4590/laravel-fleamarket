@@ -26,6 +26,11 @@ class ItemController extends Controller
         }
     } else {
         $query = Item::query();
+
+        // 自分が出品した商品を除外
+        if (Auth::check()) {
+            $query->where('user_id', '!=', Auth::id());
+        }
     }
 
     // 🔍 部分一致検索
