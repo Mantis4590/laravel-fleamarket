@@ -3,6 +3,9 @@
 @section('title', '商品詳細')
 @section('css')
 <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+
+
 @endsection
 
 @section('content')
@@ -25,8 +28,11 @@
 
             {{-- 右カラム : 商品情報 --}}
             <div class="item-detail__info">
-                <h2 class="item-detail__name">{{ $item->name }}</h2>
-                <p>ブランド: {{ $item->brand ?: '無し' }}</p>
+                <div class="item-detail__name">{{ $item->name }}</div>
+                <div class="item-detail__brand">
+                    <p>ブランド: {{ $item->brand ?: '無し' }}</p>
+                </div>
+                
                 <p class="item-detail__price">¥{{ number_format($item->price) }} <span class="item-detail__tax">(税込)</span></p>
 
                 @php
@@ -34,22 +40,26 @@
                 @endphp
 
                 <div class="item-detail__actions">
-                    {{-- いいねボタン --}}
-                    <form action="{{ $liked ? route('like.destroy', $item->id) : route('like.store', $item->id) }}" method="POST" style="display:inline;">
-                        @csrf
-                        @if($liked)
-                            @method('DELETE')
-                            <button type="submit" class="item-detail__icon item-detail__icon--liked">
-                                ★ <span>{{ $item->likes->count() }}</span>
-                            </button>
-                        @else
-                            <button class="item-detail__icon">☆ <span>{{ $item->likes->count() }}</span></button>
-                        @endif
-                    </form>
+    {{-- いいね --}}
+    <form action="{{ $liked ? route('like.destroy', $item->id) : route('like.store', $item->id) }}" method="POST" class="item-detail__action item-detail__action--like">
+        @csrf
+        @if($liked)
+            @method('DELETE')
+            <button type="submit" class="item-detail__icon item-detail__icon--liked">
+                ★
+            </button>
+        @else
+            <button type="submit" class="item-detail__icon">☆</button>
+        @endif
+        <span class="item-detail__count">{{ $item->likes->count() }}</span>
+    </form>
 
-                    {{-- コメント数 --}}
-                    <span class="item-detail__icon item-detail__icon--comment">💬 <span>{{ $item->comments->count() }}</span></span>
-                </div>
+    {{-- コメント --}}
+    <div class="item-detail__action">
+        <span class="material-icons-outlined item-detail__icon">chat_bubble_outline</span>
+        <span class="item-detail__count">{{ $item->comments->count() }}</span>
+    </div>
+</div>
 
                 <a href="{{ route('purchase.show', ['item_id' => $item->id]) }}" class="item-detail__purchase-btn">
                 購入手続きへ

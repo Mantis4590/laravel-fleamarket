@@ -30,7 +30,7 @@ body {
     align-items: flex-start;
     gap: 60px;
     max-width: 1000px;
-    margin: 40px auto;
+    margin: 0px auto;
 }
 
 .item-detail__image-area {
@@ -53,17 +53,32 @@ body {
     flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 1px;
+}
+
+.item-detail__info p {
+    margin: 0;
+    line-height: 1.4;
 }
 
 .item-detail__name {
-    font-size: 20px;
+    font-size: 24px;
     font-weight: bold;
+    margin-bottom: 1px;
+}
+.item-detail__brand {
+    font-size: 10px;
+    margin-top: 5px;
+}
+
+.item-detail__info p:first-of-type {
+    margin-top: 2px;
+    /* ← 上の余白をほんの少しだけ空ける（自然に） */
 }
 
 .item-detail__price {
     font-size: 18px;
-    margin: 8px 0;
+    margin: 4px 0 8px 0;
 }
 
 /* コメント欄のユーザーアイコン */
@@ -79,20 +94,6 @@ body {
     margin-right: 8px;
     /* 名前との間に少し余白 */
     vertical-align: middle;
-}
-
-.item-detail__icon {
-    background-color: none;
-    border: none;
-    cursor: pointer;
-    font-size: 20px;
-    padding: 0;
-    margin-right: 10px;
-    color: #333;
-    display: inline-flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 4px;
 }
 
 .item-detail__icon--liked {
@@ -112,6 +113,18 @@ body {
     margin-left: 2px;
 }
 
+.item-detail__section {
+    margin-top: 12px;
+    margin-bottom: 5px;
+    
+}
+
+.item-detail__subtitle {
+    margin-top: 1px;
+    margin-bottom: 4px;
+    font-size: 18px;
+}
+
 .item-detail__purchase-btn {
     display: block;
     width: 100%;
@@ -125,6 +138,7 @@ body {
     cursor: pointer;
     transition: background-color 0.3s;
     text-decoration: none;
+    margin-top: 8px;
 }
 
 .item-detail__comment-text {
@@ -166,4 +180,119 @@ body {
     font-size: 12px;
     font-weight: bold;
     border-radius: 4px;
+}
+
+.item-detail__actions {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.item-detail__action {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+    border: none;
+    background: none;
+    line-height: 1;
+}
+
+.item-detail__action--like {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.item-detail__icon {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    color: #555;
+    padding: 0;
+    transition: opacity 0.25s;
+
+}
+
+.item-detail__icon:hover {
+    opacity: 0.7;
+}
+
+.item-detail__icon--liked {
+    color: #EB5757;
+}
+
+.item-detail__count {
+    font-size: 14px;
+    color: #333;
+    line-height: 1;
+    
+}
+
+.item-detail__icon.material-icons-outlined {
+    font-size: 20px;
+    line-height: 1;
+    vertical-align: middle;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    top: 2px; /* ← ここがポイント！コメントアイコンを下げる */
+}
+
+.material-icons-outlined.item-detail__icon {
+    position: relative;
+    top: 1px;
+    /* ← コメントアイコンをほんの少し下げる */
+}
+
+/* ===============================
+   アイコン間隔の最終調整
+   =============================== */
+.item-detail__actions {
+    display: flex;
+    gap: 32px;
+    /* ← 星と吹き出しの横の間隔 */
+    align-items: flex-start;
+    /* ← baselineを避ける */
+}
+
+.item-detail__action {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    /* ← アイコンと数字の距離を統一 */
+}
+
+/* 星（いいね）アイコン */
+.item-detail__icon {
+    font-size: 24px;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 吹き出し（Material Icons）だけ微調整 */
+.material-icons-outlined.item-detail__icon {
+    font-size: 24px;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: translateY(1px);
+    /* ← topよりも安定する */
+}
+
+/* カウント数字 */
+.item-detail__count {
+    margin: 0;
+    padding: 0;
+    line-height: 1;
+    font-size: 13px;
 }
