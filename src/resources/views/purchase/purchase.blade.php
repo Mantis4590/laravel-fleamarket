@@ -9,7 +9,7 @@
 @section('content')
 <main class="purchase">
     {{-- formをここで1つだけ開く --}}
-    <form action="{{ route('purchase.store', ['item_id' => $item->id]) }}" method="POST" class="purchase__container">
+    <form action="{{ route('purchase.store', ['item_id' => $item->id]) }}" method="GET" class="purchase__container">
         @csrf
         {{-- 左側:商品情報 --}}
         <div class="purchase__left">
@@ -28,10 +28,10 @@
             {{-- 支払い方法 --}}
             <div class="purchase__section">
                 <h3 class="purchase__title">お支払い方法</h3>
-                <select name="payment_method" class="purchase__select">
+                <select name="payment_method" class="purchase__select" onchange="this.form.submit()">
                     <option value="">選択してください</option>
-                    <option value="コンビニ払い" {{ old('payment_method') === 'コンビニ払い' ? 'selected' : '' }}>コンビニ払い</option>
-                    <option value="カード払い" {{ old('payment_method') === 'カード払い' ? 'selected' : '' }}>カード払い</option>
+                    <option value="コンビニ払い" {{ request('payment_method') === 'コンビニ払い' ? 'selected' : '' }}>コンビニ払い</option>
+                    <option value="カード払い" {{ request('payment_method') === 'カード払い' ? 'selected' : '' }}>カード払い</option>
                 </select>
                 @error('payment_method')
                     <p class="purchase__error">{{ $message }}</p>
@@ -64,14 +64,14 @@
                     </tr>
                     <tr class="table__bottom-border">
                         <th>お支払い方法</th>
-                        <td>{{ old('payment_method') ?? '未設定' }}</td>
+                        <td>{{ request('payment_method') ?: '未設定' }}</td>
                     </tr>
                 </table>
             </div>
 
             
             <div class="purchase__btn">
-                <button type="submit" class="purchase__button">購入する
+                <button type="submit" formaction="{{ route('purchase.store', ['item_id' => $item->id]) }}" formmethod="POST" class="purchase__button">購入する
                 </button>
             </div>
         </div>
