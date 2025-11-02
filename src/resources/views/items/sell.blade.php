@@ -24,18 +24,20 @@
 
         {{-- 商品画像 --}}
         <section class="exhibition__section">
-            <h3 class="exhibition__subtitle">商品画像</h3>
-            <label for="img_url" class="exhibition__image-label">画像を選択する</label>
+            <h3 class="exhibition__item-title">商品画像</h3>
+            <div class="exhibition__image-border">
+                <label for="img_url" class="exhibition__image-label">画像を選択する</label>
             <input type="file" id="img_url" name="img_url" accept="image/jpeg, image/png" hidden>
             @error('img_url')
                 <p class="exhibition__error">{{ $message }}</p>
             @enderror
+            </div>
         </section>
 
         {{-- 商品の詳細 --}}
         <section class="exhibition__section">
             <div class="exhibition__section-border">
-                <h3 class="exhibition__subtitle">商品の詳細</h3>
+                <div class="exhibition__subtitle">商品の詳細</div>
             </div>
             
 
@@ -59,7 +61,7 @@
 
             {{-- 商品の状態 --}}
             <div class="exhibition__group">
-                <label for="condition" class="exhibition__label">商品の状態</label>
+                <label for="condition" class="exhibition__box">商品の状態</label>
                 <select name="condition" id="condition" class="exhibition__select">
                     <option value="">選択してください</option>
                     <option value="良好" {{ old('condition') === '良好' ? 'selected' : '' }}>良好</option>
@@ -70,18 +72,19 @@
                 @error('condition')
                     <p class="exhibition__error">{{ $message }}</p>
                 @enderror
+                
             </div>
         </section>
 
         {{-- 商品名と説明 --}}
         <section class="exhibition__section">
             <div class="exhibition__section-border">
-                <h3 class="exhibition__subtitle">商品名と説明</h3>
+                <div class="exhibition__subtitle">商品名と説明</div>
             </div>
             
 
             <div class="exhibition__group">
-                <label for="name" class="exhibition__label">商品名</label>
+                <label for="name" class="exhibition__box">商品名</label>
                 <input type="text" name="name" id="name" class="exhibition__input" value="{{ old('name') }}">
                 @error('name')
                     <p class="exhibition__error">{{ $message }}</p>
@@ -89,12 +92,12 @@
             </div>
 
             <div class="exhibition__group">
-                <label for="brand" class="exhibition__label">ブランド名</label>
+                <label for="brand" class="exhibition__box">ブランド名</label>
                 <input type="text" name="brand" id="brand" class="exhibition__input" value="{{ old('brand') }}">
             </div>
 
             <div class="exhibition__group">
-                <label for="description" class="exhibition__label">商品の説明</label>
+                <label for="description" class="exhibition__box">商品の説明</label>
                 <textarea name="description" id="description" class="exhibition__textarea">{{ old('descripition') }}</textarea>
                 @error('description')
                     <p class="exhibition__error">{{ $message }}</p>
@@ -102,7 +105,7 @@
             </div>
 
             <div class="exhibition__group">
-                <label for="price" class="exhibition__label">販売価格</label>
+                <label for="price" class="exhibition__box">販売価格</label>
                 <div class="exhibition__price-box">
                     <span>¥</span>
                     <input type="number" name="price" id="price" class="exhibition__input-price" value="{{ old('price') }}">

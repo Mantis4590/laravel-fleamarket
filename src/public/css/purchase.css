@@ -15,26 +15,35 @@
 
 .purchase__container {
     display: flex;
-    justify-self: space-between;
+    justify-content: space-between;
     width: 90%;
     max-width: 1100px;
     gap: 40px;
+    flex-wrap: nowrap;
 }
 
 /*左カラム*/
 .purchase__left {
     flex: 2;
+    min-width: 0;
+    padding: 25px;
+}
+
+.purchase__item {
+    display: flex;
+    margin-bottom: 35px;
 }
 
 .purchase__item-image {
-    width: 110px;
-    height: 110px;
+    width: 140px;
+    height: 140px;
     object-fit: cover;
+    margin-right: 40px;
 }
 
 .purchase__item-noimage {
-    width: 110px;
-    height: 110px;
+    width: 140px;
+    height: 140px;
     background-color: #f2f2f2;
     display: flex;
     align-items: center;
@@ -46,30 +55,43 @@
 .purchase__item-name {
     font-size: 20px;
     font-weight: bold;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
+    margin-top: 0;
 }
 
 .purchase__item-price {
     font-size: 18px;
+    margin: 0;
 }
 
 /*お支払い方法・配送先セクション*/
 .purchase__section {
     border-top: 1px solid #999;
-    padding-top: 20px;
-    margin-bottom: 40px;
+    padding-top: 5px;
+    margin-bottom: 55px;
+    
+
+}
+
+
+.purchase__section:last-child {
+    border-bottom: 1px solid #999;
+    
 }
 
 .purchase__title {
+    display: flex;
     font-size: 14px;
     font-weight: bold;
-    margin-bottom: 10px;
+    margin-bottom: 30px;
+    margin-left: 20px;
 }
 
 .purchase__select {
     width: 200px;
     height: 30px;
     font-size: 14px;
+    margin-left: 80px;
 }
 
 .purchase__errors {
@@ -90,13 +112,15 @@
 
 .purchase__address {
     margin-top: 10px;
+    margin-left: 80px;
+    margin-bottom: 40px;
 }
 
 .purchase__change-like {
     color: #2F80ED;
     text-decoration: none;
     font-size: 14px;
-    margin-left: 10px;
+    margin-left: 470px;
 }
 
 .purchase__change-like:hover {
@@ -107,31 +131,54 @@
 .purchase__summary {
     flex: 1;
     min-width: 320px;
-    border: 1px solid #000;
     padding: 25px;
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
 }
 
+.purchase__card {
+    border: 1px solid #000;
+    /* ←ここで四辺まとめて締める */
+    box-sizing: border-box;
+    margin-bottom: 45px;
+    padding: 0 auto;
+}
+
 /* テーブル */
 .purchase__table {
     width: 100%;
+    height: 180px;
     border-collapse: collapse;
     font-size: 14px;
-    margin-bottom: 30px;
-    /* 👈 テーブル下に余白を強制的に追加！ */
+    
+}
+
+.table__top-border {
+    border-bottom: 1px solid #000;
+    
+}
+
+.table__bottom-border {
+    align-items: center;
+    
 }
 
 .purchase__table th,
 .purchase__table td {
-    border-bottom: 1px solid #000;
-    padding: 15px 10px;
-    text-align: left;
+    padding: 15px 40px;
+    text-align: center; /* 👈 横中央寄せ */
+    vertical-align: middle;
 }
 
-.purchase__table th {
-    font-weight: bold;
+.purchase__table tr:last-child th,
+.purchase__table tr:last-child td {
+    border-bottom: none;
+    /* 枠線の二重防止 */
+}
+
+.purchase__table td {
+    font-size: 16px;
 }
 
 /* ボタン */
@@ -140,14 +187,18 @@
     color: #fff;
     border: none;
     border-radius: 6px;
-    padding: 14px 0;
+    padding: 8px 0;
     font-size: 16px;
     font-weight: bold;
     cursor: pointer;
     width: 100%;
-    display: block;
 }
+
 
 .purchase__button:hover {
     opacity: 0.9;
+}
+
+.purchase__btn {
+    flex-direction: column;
 }

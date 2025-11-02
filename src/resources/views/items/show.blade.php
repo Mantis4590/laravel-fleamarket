@@ -40,26 +40,28 @@
                 @endphp
 
                 <div class="item-detail__actions">
-    {{-- いいね --}}
-    <form action="{{ $liked ? route('like.destroy', $item->id) : route('like.store', $item->id) }}" method="POST" class="item-detail__action item-detail__action--like">
-        @csrf
-        @if($liked)
-            @method('DELETE')
-            <button type="submit" class="item-detail__icon item-detail__icon--liked">
-                ★
-            </button>
-        @else
-            <button type="submit" class="item-detail__icon">☆</button>
-        @endif
-        <span class="item-detail__count">{{ $item->likes->count() }}</span>
-    </form>
+                    {{-- いいね --}}
+                    <form action="{{ $liked ? route('like.destroy', $item->id) : route('like.store', $item->id) }}" method="POST" class="item-detail__action item-detail__action--like">
+                        @csrf
+                        @if($liked)
+                            @method('DELETE')
+                            <button type="submit" class="item-detail__icon item-detail__icon--liked">
+                            ★
+                            </button>
+                        @else
+                            <button type="submit" class="item-detail__icon">☆</button>
+                        @endif
+                            <span class="item-detail__count">{{ $item->likes->count() }}</span>
+                    </form>
 
-    {{-- コメント --}}
-    <div class="item-detail__action">
-        <span class="material-icons-outlined item-detail__icon">chat_bubble_outline</span>
-        <span class="item-detail__count">{{ $item->comments->count() }}</span>
-    </div>
-</div>
+                    {{-- コメント --}}
+                    <div class="item-detail__action">
+                        <span class="material-icons-outlined item-detail__icon">chat_bubble_outline
+                        </span>
+                        <span class="item-detail__count">{{ $item->comments->count() }}
+                        </span>
+                    </div>
+                </div>
 
                 <a href="{{ route('purchase.show', ['item_id' => $item->id]) }}" class="item-detail__purchase-btn">
                 購入手続きへ

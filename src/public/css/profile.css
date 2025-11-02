@@ -12,7 +12,7 @@ body {
    メイン（プロフィール設定）
    =============================== */
 .profile {
-    max-width: 480px;
+    max-width: 600px;
     margin: 0 auto;
     padding: 0 16px;
 }
@@ -28,16 +28,19 @@ body {
 .profile__image-area {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: left;
     margin-bottom: 30px;
     gap: 20px;
     justify-content: flex-start;
+
 }
 
 .profile__image-area__top {
     display: flex;
     gap: 60px;
-    justify-content: center;
+    justify-content: left;
+    
+
 }
 
 .profile__image {
@@ -62,18 +65,18 @@ body {
     justify-content: center;
     width: 150px;
     /* ← 横幅を少し細めに */
-    height: 50px;
+    height: 30px;
     /* ← 縦を広めにして長方形に */
     color: #f08080;
     border: 1px solid #f08080;
     border-radius: 6px;
     background-color: #fff;
-    font-size: 14px;
-    font-weight: 500;
+    font-size: 15px;
     cursor: pointer;
     transition: 0.3s;
     margin-top: 30px;
-    padding: 20px 4px;
+    padding: 15px 2px;
+    margin-left: 0;
 }
 
 .profile__image-button:hover {

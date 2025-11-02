@@ -1,72 +1,93 @@
 @extends('layouts.app')
 
-@section('title', '商品購入')
-
+@section('title', '商品詳細（ゲスト）')
 @section('css')
-<link rel="stylesheet" href="{{ asset('css/purchase.css') }}">
+<link rel="stylesheet" href="{{ asset('css/style_guest.css') }}">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
 @endsection
 
 @section('content')
-<main class="purchase">
-    {{-- formは全体を包む --}}
-    <form action="{{ route('purchase.store', ['item_id' => $item->id]) }}" method="POST" class="purchase__container">
-        @csrf
-
-        {{-- 左側:商品情報 --}}
-        <div class="purchase__left">
-            <div class="purchase__item">
+    <main class="item-detail">
+        <div class="item-detail__container">
+            <div class="item-detail__image-area">
                 @if (!empty($item->img_url))
-                    <img src="{{ asset('storage/' . $item->img_url) }}" alt="{{ $item->name }}" class="purchase__item-image">
+                    <img src="{{ asset('storage/' . $item->img_url) }}" alt="{{ $item->name }}" class="item-detail__image">
                 @else
-                    <div class="purchase__item-noimage">商品画像</div>
+                    <div class="item-detail__noimage">商品画像</div>
                 @endif
-                <div class="purchase__item-info">
-                    <p class="purchase__item-name">{{ $item->name }}</p>
-                    <p class="purchase__item-price">¥{{ number_format($item->price) }}</p>
-                </div>
+
+                {{-- SOLD表示だけ（未購入なら何も表示しない） --}}
+                @if ($item->buyer_id)
+                    <p class="item-detail__sold">SOLD</p>
+                @endif
             </div>
 
-            {{-- 支払い方法 --}}
-            <div class="purchase__section">
-                <h3 class="purchase__title">お支払い方法</h3>
-                <select name="payment_method" class="purchase__select">
-                    <option value="">選択してください</option>
-                    <option value="コンビニ払い" {{ old('payment_method') === 'コンビニ払い' ? 'selected' : '' }}>コンビニ払い</option>
-                    <option value="カード払い" {{ old('payment_method') === 'カード払い' ? 'selected' : '' }}>カード払い</option>
-                </select>
-                @error('payment_method')
-                    <p class="purchase__error">{{ $message }}</p>
-                @enderror
-            </div>
 
-            {{-- 配送先 --}}
-            <div class="purchase__section">
-                <h3 class="purchase__title">配送先</h3>
-                <div class="purchase__address">
-                    <p>〒 {{ $user->postcode }}</p>
-                    <p>{{ $user->address }}</p>
-                    <a href="{{ route('purchase.address.edit', ['item_id' => $item->id]) }}" class="purchase__change-like">変更する</a>
+            <div class="item-detail__info">
+                <h2 class="item-detail__name">{{ $item->name }}</h2>
+                <p>ブランド: {{ $item->brand ?: '無し' }}</p>
+                <p class="item-detail__price">¥{{ number_format($item->price) }} <span class="item-detail__tax">(税込)</span></p>
+
+                <div class="item-detail__actions">
+                    {{-- いいね --}}
+                    <form action="{{ route('login') }}" method="GET" class="item-detail__action item-detail__action--like">
+                        <button type="submit" class="item-detail__icon">☆</button>
+                        <span class="item-detail__count">{{ $item->likes->count() }}</span>
+                    </form>
+                    
+                    {{-- コメント --}}
+                    <div class="item-detail__action">
+                        <span class="material-icons-outlined item-detail__icon">chat_bubble_outline
+                        </span>
+                        <span class="item-detail__count">{{ $item->comments->count() }}
+                        </span>
+                    </div>
                 </div>
-                @error('address')
-                    <p class="purchase__error">{{ $message }}</p>
-                @enderror
+
+                <a href="{{ route('login') }}" class="item-detail__purchase-btn">購入手続きへ</a>
+
+                <section class="item-detail__section">
+                    <h3 class="item-detail__subtitle">商品説明</h3>
+                    <p class="item-detail__description">{{ $item->description }}</p>
+                </section>
+
+                <section class="item-detail__section">
+                    <h3 class="item-detail__subtitle">商品の情報</h3>
+                    @if ($item->categories->isNotEmpty())
+                        <p>
+                            カテゴリー: 
+                            @foreach ($item->categories as $category)
+                            {{ $category->name }}@if (!$loop->last), @endif
+                            @endforeach
+                        </p>
+                    @else
+                        <p>カテゴリー: 未設定</p>
+                    @endif
+
+                    <p>商品の状態: {{ $item->condition ?? '良好' }}</p>
+                </section>
+
+                <section class="item-detail__section">
+                    <h3 class="item-detail__subtitle">コメント({{ $item->comments->count() }})</h3>
+
+                    @foreach($item->comments as $comment)
+                        <div class="item-detail__comment">
+                            <div class="item-detail__comment-user">
+                                <img src="{{ asset('storage/' . $comment->user->profile_image) }}" alt="user" class="item-detail__comment-icon">
+                                <span>{{ $comment->user->name }}</span>
+                            </div>
+                            <p class="item-detail__comment-text">{{ $comment->content }}</p>
+                        </div>
+                    @endforeach
+
+                    {{-- ゲストはコメントできない --}}
+                    <div class="item-detail__comment-form">
+                        <label class="item-detail__textarea-message">商品へのコメント</label>
+                        <textarea class="item-detail__textarea" placeholder="コメントするにはログインしてください" disabled></textarea>
+                        <a href="{{ route('login') }}" class="item-detail__button item-detail__button--disabled">コメントを送信する</a>
+                    </div>
+                </section>
             </div>
         </div>
-
-        {{-- 右側:購入画面 --}}
-        <div class="purchase__summary">
-            <table class="purchase__table">
-                <tr>
-                    <th>商品代金</th>
-                    <td>¥{{ number_format($item->price) }}</td>
-                </tr>
-                <tr>
-                    <th>お支払い方法</th>
-                    <td>{{ old('payment_method') ?: '未設定' }}</td>
-                </tr>
-            </table>
-            <button type="submit" class="purchase__button">購入する</button>
-        </div>
-    </form>
-</main>
+    </main>
 @endsection

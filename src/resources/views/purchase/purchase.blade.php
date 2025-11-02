@@ -40,29 +40,42 @@
 
             {{-- 配送先 --}}
             <div class="purchase__section">
-                <h3 class="purchase__title">配送先</h3>
+                <div class="purchase__section-group">
+                    <h3 class="purchase__title">配送先
+                        <a href="{{ route('purchase.address.edit', ['item_id' => $item->id]) }}" class="purchase__change-like">変更する</a>
+                    </h3>
+                    
+                </div>
                 <div class="purchase__address">
                     <p>〒 {{ $user->postcode }}</p>
                     <p>{{ $user->address }}</p>
-                    <a href="{{ route('purchase.address.edit', ['item_id' => $item->id]) }}" class="purchase__change-like">変更する</a>
+                    
                 </div>
             </div>
         </div>
 
         {{-- 右側:購入画面 --}}
         <div class="purchase__summary">
-            <table class="purchase__table">
-                <tr>
-                    <th>商品代金</th>
-                    <td>¥{{ number_format($item->price) }}</td>
-                </tr>
-                <tr>
-                    <th>お支払い方法</th>
-                    <td>{{ old('payment_method') ?? '未設定' }}</td>
-                </tr>
-            </table>
-            <button type="submit" class="purchase__button">購入する</button>
+            <div class="purchase__card">
+                <table class="purchase__table">
+                    <tr class="table__top-border">
+                        <th>商品代金</th>
+                        <td>¥{{ number_format($item->price) }}</td>
+                    </tr>
+                    <tr class="table__bottom-border">
+                        <th>お支払い方法</th>
+                        <td>{{ old('payment_method') ?? '未設定' }}</td>
+                    </tr>
+                </table>
+            </div>
+
+            
+            <div class="purchase__btn">
+                <button type="submit" class="purchase__button">購入する
+                </button>
+            </div>
         </div>
+        
     </form>
 </main>
 @endsection

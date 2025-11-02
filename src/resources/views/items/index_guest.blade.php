@@ -17,8 +17,9 @@
             @foreach ($items as $item)
             <div class="item-card">
                 {{-- 画像ラッパとimgクラスは任意（見やすく） --}}
-                <div class="item-card__img">
-                    <a href="{{ route('item.show', ['item_id' => $item->id]) }}">
+                <a href="{{ route('item.show', ['item_id' => $item->id]) }}">
+                    <div class="item-card__img">
+                    
                         @if (!empty($item->img_url))
                             <img src="{{ asset('storage/' . $item->img_url) }}" alt="{{ $item->name }}" class="item-card__image">
                         @else
@@ -29,9 +30,8 @@
                         @if (!empty($item->buyer_id))
                             <span class="item-card__sold">SOLD</span>
                         @endif
-                    </a>
-                        
-                </div>
+                    </div>
+                </a>
             <p class="item-card__name">{{ $item->name }}</p>
         </div>
         @endforeach

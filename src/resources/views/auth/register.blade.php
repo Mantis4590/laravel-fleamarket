@@ -35,12 +35,20 @@
                 <label for="password" class="register__label">パスワード</label>
                 <input type="password" name="password" id="password" class="register__input">
                 @error('password')
-                    <p class="register__error">{{ $message }}</p>
+                    @if ($message !== 'パスワードと一致しません')
+                        <p class="register__error">{{ $message }}</p>
+                    @endif
                 @enderror
             </div>
             <div class="register__group">
                 <label for="password_confirmation" class="register__label">確認用パスワード</label>
                 <input type="password" name="password_confirmation" id="password_confirmation" class="register__input">
+                @error('password')
+                    @if ($message === 'パスワードと一致しません')
+                        <p class="register__error">{{ $message }}</p>
+                    @endif
+                @enderror
+
                 @error('password_confirmation')
                     <p class="register__error">{{ $message }}</p>
                 @enderror

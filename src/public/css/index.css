@@ -57,21 +57,29 @@ body {
    タブエリア
    =============================== */
 .tab {
+    width: 100vw;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: left;
+    padding-left: 130px;
     border-bottom: 1px solid #ccc;
     /* 下全体の薄い線 */
     margin-bottom: 30px;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    /* ←中央からはみ出して全幅化 */
+    margin-right: -50vw;
 }
 
 .tab__item {
-    padding: 10px 20px;
+    padding: 10px 30px;
     font-weight: bold;
     color: #666;
     text-decoration: none;
     border-bottom: 2px solid transparent;
     transition: color 0.3s, border-bottom 0.3s;
+    
 }
 
 .tab__item:hover {
@@ -81,8 +89,6 @@ body {
 .tab__item--active {
     color: #ff4d4d;
     /* 赤文字 */
-    border-bottom: 2px solid #ff4d4d;
-    /* 下線赤 */
 }
 
 .item-card__sold {

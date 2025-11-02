@@ -4,14 +4,8 @@ body {
     padding: 0;
     background-color: #fff;
     color: #333;
+    
 }
-
-/* ===============================
-   ヘッダー
-   =============================== */
-
-
-
 
 .header__button {
     background-color: #fff;
@@ -24,6 +18,10 @@ body {
     transition: 0.3s;
 }
 
+.item-detail {
+    margin-top: 60px;
+}
+
 .item-detail__container {
     display: flex;
     justify-content: center;
@@ -31,6 +29,7 @@ body {
     gap: 60px;
     max-width: 1000px;
     margin: 0px auto;
+    
 }
 
 .item-detail__image-area {
@@ -39,6 +38,7 @@ body {
     justify-content: center;
     align-items: center;
     align-items: center;
+    
 }
 
 .item-detail__image {
@@ -141,9 +141,6 @@ body {
     margin-top: 8px;
 }
 
-.item-detail__comment-text {
-    
-}
 
 .item-detail__textarea-message {
     font-size: 15px;
@@ -172,7 +169,7 @@ body {
 
 .item-detail__sold {
     position: absolute;
-    top: 110px;
+    top: 130px;
     left: 270px;
     background-color: rgba(0, 0, 0, 0.7);
     color: #fff;

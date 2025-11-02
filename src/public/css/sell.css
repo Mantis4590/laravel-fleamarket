@@ -18,16 +18,28 @@
     margin-bottom: 40px;
 }
 
-.exhibition__subtitle {
+.exhibition__item-title {
     font-size: 18px;
     font-weight: bold;
     margin-bottom: 3px;
+    padding-bottom: 3px;
+    color: #000;
+}
+
+.exhibition__subtitle {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 3px;
     padding-bottom: 5px;
+    color: #646464;
 }
 
 .exhibition__section-border .exhibition__subtitle {
     font-size: 22px;
     font-weight: bold;
+}
+
+.exhibition__section-border {
     color: #333;
 }
 
@@ -49,21 +61,27 @@
 }
 
 /*商品画像エリア*/
-.exhibition__image-label {
+.exhibition__image-border {
     display: block;
     width: 100%;
-    height: 180px;
+    height: 140px;
     color: #ff7775;
     border: 2px dashed #ddd;
     border-radius: 6px;
     text-align: center;
-    line-height: 180px;
+    line-height: 140px;
     font-weight: bold;
     transition: all 0.2s ease;
     cursor: pointer;
 }
 
-.exhibition__image-label:hover {
+.exhibition__image-label {
+    border: 2px solid #ff5555;
+    border-radius: 8px;
+    padding: 10px 20px;
+}
+
+.exhibition__image-border:hover {
     background-color: #fff5f5;
     border-color: #ff6b6b;
 }
@@ -114,6 +132,16 @@
     gap: 10px;
 }
 
+.exhibition__group {
+    margin: 30px auto;
+}
+
+
+
+.exhibition__label {
+    margin-bottom: 30px;
+}
+
 .exhibition__category {
     position: relative;
     display: inline-flex;
@@ -121,11 +149,13 @@
     justify-content: center;
     border: 1px solid #ff6b6b;
     border-radius: 20px;
-    padding: 8px 16px;
+    padding: 1px 14px;
     color: #ff6b6b;
     font-size: 14px;
     cursor: pointer;
     transition: all 0.2s ease;
+    margin-left: 10px;
+    
 }
 
 /* チェックボックスは非表示 */
@@ -133,6 +163,7 @@
     position: absolute;
     opacity: 0;
     pointer-events: none;
+    gap: 20px 10px;
 }
 
 /* ✅ チェック状態になったときに label 自体を変化 */
@@ -144,6 +175,16 @@
     border-color: #ff6b6b;
     transform: scale(1.05);
     /* 少しだけ大きく */
+}
+
+.exhibition__select {
+    margin-top: 1px;
+}
+
+.exhibition__box {
+    margin-bottom: 5px;
+    color: #000;
+    font-size: 18px;
 }
 
 /*販売価格入力*/
@@ -174,19 +215,21 @@
 /*出品ボタン*/
 .exhibition__submit {
     text-align: center;
-    margin-top: 40px;
+    margin-top: 80px;
+    
 }
 
 .exhibition__button {
-    background-color: #ff6b6b;
+    background-color: #ff5555;
     color: #fff;
-    font-size: 16px;
+    font-size: 18px;
     font-weight: bold;
     border: none;
     border-radius: 5px;
     padding: 12px 40px;
     cursor: pointer;
     transition: 0.2s;
+    width: 100%;
 }
 
 .exhibition__button:hover {
