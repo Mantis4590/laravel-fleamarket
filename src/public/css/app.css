@@ -205,7 +205,7 @@ textarea:focus {
    =============================== */
 .item-list {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(4, 1fr);
     gap: 40px;
     width: 90%;
     max-width: 1000px;
@@ -299,21 +299,22 @@ textarea:focus {
 }
 
 /* 右カラム : 商品情報 */
-.item-detail__info {
+.item-detail__right {
     flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    
 }
 
 .item-detail__name {
-    font-size: 20px;
+    font-size: 21px;
     font-weight: bold;
 }
 
 .item-detail__brand {
     color: #777;
     font-size: 14px;
+
 }
 
 .item-detail__price {
@@ -322,8 +323,7 @@ textarea:focus {
 }
 
 .item-detail__tax {
-    font-size: 12px;
-    color: #777;
+    font-size: 14px;
 }
 
 /* ===============================
@@ -334,6 +334,9 @@ textarea:focus {
     display: flex;
     align-items: center;
     gap: 10px;
+    margin-left: 20px;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
 .item-detail__icon {
@@ -395,17 +398,36 @@ textarea:focus {
    商品説明・情報
    =============================== */
 .item-detail__section {
-    margin-top: 24px;
+    margin-top: 12px;
+    margin-bottom: 2px;
+
 }
 
-.item-detail__subtitle {
-    font-size: 16px;
+.item-detail--sub {
+    margin-top: 0;
+}
+
+
+
+.item-detail__subtitle,
+.item-detail__info {
+    font-size: 19px;
     font-weight: bold;
-    margin-bottom: 8px;
+}
+
+.item-detail--category {
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.item-detail--category-name {
+    background-color: #d9d9d9;
+    padding: 6px 20px;
+    border-radius: 20px;
 }
 
 .item-detail__description {
-    font-size: 14px;
+    font-size: 15px;
     line-height: 1.6;
 }
 

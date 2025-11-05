@@ -49,30 +49,23 @@ body {
     border: 1px solid #ddd;
 }
 
-.item-detail__info {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 1px;
-}
 
-.item-detail__info p {
-    margin: 0;
-    line-height: 1.4;
-}
+
+
 
 .item-detail__name {
     font-size: 24px;
     font-weight: bold;
-    margin-bottom: 1px;
+    margin-bottom: 0;
 }
 .item-detail__brand {
     font-size: 10px;
-    margin-top: 5px;
+    margin-top: 0;
+    margin-bottom: 5px;
 }
 
 .item-detail__info p:first-of-type {
-    margin-top: 2px;
+    margin-top: 0;
     /* ← 上の余白をほんの少しだけ空ける（自然に） */
 }
 
@@ -113,17 +106,7 @@ body {
     margin-left: 2px;
 }
 
-.item-detail__section {
-    margin-top: 12px;
-    margin-bottom: 5px;
-    
-}
 
-.item-detail__subtitle {
-    margin-top: 1px;
-    margin-bottom: 4px;
-    font-size: 18px;
-}
 
 .item-detail__purchase-btn {
     display: block;
@@ -245,6 +228,12 @@ body {
     position: relative;
     top: 1px;
     /* ← コメントアイコンをほんの少し下げる */
+}
+
+.item-detail__error {
+    color: #ff4d4d;
+    font-size: 12px;
+    margin-top: 4px;
 }
 
 /* ===============================

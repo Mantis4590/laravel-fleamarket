@@ -27,7 +27,7 @@
 
 
             {{-- 右カラム : 商品情報 --}}
-            <div class="item-detail__info">
+            <div class="item-detail__right">
                 <div class="item-detail__name">{{ $item->name }}</div>
                 <div class="item-detail__brand">
                     <p>ブランド: {{ $item->brand ?: '無し' }}</p>
@@ -73,21 +73,24 @@
                     <p class="item-detail__description">{{ $item->description }}</p>
                 </section>
 
-                <section class="item-detail__section">
-                    <h3 class="item-detail__subtitle">商品の情報</h3>
+                <section class="item-detail--sub">
+                    <div class="item-detail__info-group">
+                        <h3 class="item-detail__info">商品の情報</h3>
 
-                    @if ($item->categories->isNotEmpty())
-                        <p>
-                            カテゴリー: 
-                            @foreach ($item->categories as $category)
-                            {{ $category->name }}@if (!$loop->last), @endif
-                            @endforeach
-                        </p>
-                    @else
-                        <p>カテゴリー: 未設定</p>
-                    @endif
+                        @if ($item->categories->isNotEmpty())
+                            <p class="item-detail--category">
+                                カテゴリー: 
+                                @foreach ($item->categories as $category)
+                                <span class="item-detail--category-name">{{ $category->name }}</span>
+                                @if (!$loop->last), @endif
+                                @endforeach
+                            </p>
+                        @else
+                            <p>カテゴリー: 未設定</p>
+                        @endif
 
-                    <p>商品の状態: {{ $item->condition ?? '良好' }}</p>
+                        <p class="item-detail--category">商品の状態: {{ $item->condition ?? '良好' }}</p>
+                    </div>
                 </section>
 
                 <section class="item-detail__section">
