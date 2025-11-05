@@ -11,10 +11,25 @@ class PurchaseController extends Controller
 {
     public function show($item_id) {
         $item = Item::findOrFail($item_id);
+
+        // すでに購入済みの場合
+        if ($item->buyer_id) {
+            return redirect()
+                ->route('item.show', $item_id)
+                ->with('error', 'この商品はすでに購入されています');
+        }
+        
+        // 自分自身が出品した商品の場合
+        if ($item->user_id === auth()->id()) {
+            return redirect()
+                ->route('item.show', $item_id)
+                ->with('error', '自分が出品した商品は購入できません');
+        }
+
+        // 購入可能の場合のみ購入画面へ
         $user = auth()->user();
         return view('purchase.purchase', compact('item', 'user'));
-    }
-
+        }
     
     public function store(PurchaseRequest $request, $item_id) {
 
