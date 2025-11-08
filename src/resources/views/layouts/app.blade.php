@@ -24,7 +24,8 @@
     {{-- 中央：検索欄 --}}
     <form action="{{ route('home') }}" method="GET" class="header__search">
         <div class="header__center">
-            <input type="text" name="keyword" class="header__search-input" placeholder="なにをお探しですか？">
+            <input type="text" name="keyword" value="{{ request('keyword') }}" class="header__search-input" placeholder="なにをお探しですか？">
+            <input type="hidden" name="tab" value="{{ request('tab', 'recommend') }}">
         </div>
     </form>
 

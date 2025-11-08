@@ -40,7 +40,7 @@ class ItemController extends Controller
 
     $items = $query->get();
 
-    return view('items.index', compact('tab', 'items'));
+    return view('items.index', compact('tab', 'items', 'keyword'));
 }
 
 

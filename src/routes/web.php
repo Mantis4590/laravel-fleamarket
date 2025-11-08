@@ -12,6 +12,7 @@ use App\Http\Controllers\LikeController;
 use App\Http\Controllers\MyPageController;
 use Illuminate\Http\Request;
 use App\Http\Controllers\PurchaseController;
+use App\Http\Controllers\StripeWebhookController;
 
 // ==============================
 // トップアクセス時（ログイン状態で振り分け）
@@ -67,3 +68,5 @@ Route::post('/sell', [ItemController::class, 'store'])->name('items.store');
 Route::get('/purchase/address/{item_id}', [PurchaseController::class, 'editAddress'])->name('purchase.address.edit');
 
 Route::post('/purchase/address/{item_id}', [PurchaseController::class, 'updateAddress'])->name('purchase.address.update');
+
+Route::post('/stripe/webhook', [StripeWebhookController::class, 'handle']);

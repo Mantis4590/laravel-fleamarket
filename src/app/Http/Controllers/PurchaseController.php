@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Item;
 use App\Http\Requests\PurchaseRequest;
 use App\Http\Requests\AddressRequest;
+use Stripe\Stripe;
+use Stripe\Checkout\Session;
 
 class PurchaseController extends Controller
 {
@@ -50,16 +52,33 @@ class PurchaseController extends Controller
         return redirect()->route('home')->with('error', 'この商品はすでに購入されています');
     }
 
-    // buyer_id 登録
-    $item->buyer_id = auth()->id();
-    $item->save();
+    \Stripe\Stripe::setApiKey(config('services.stripe.secret'));
 
-    // ← 一旦リダイレクトせずに purchase ページを再表示
-    return view('purchase.purchase', [
-        'item' => $item,
-        'user' => $user,
-        'payment_method' => $payment_method, // ← 渡す
+    // Stripe用の決済方法を切り替える
+    $stripe_payment_type = $payment_method === 'カード払い' ? 'card' : 'konbini';
+
+    $session = \Stripe\Checkout\Session::create([
+        'payment_method_types' => [$stripe_payment_type],
+        'line_items' => [[
+            'price_data' => [
+                'currency' => 'jpy',
+                'product_data' => [
+                    'name' => $item->name,
+                ],
+                'unit_amount' => $item->price,
+            ],
+            'quantity' => 1,
+        ]],
+        'mode' => 'payment',
+        'success_url' => route('home'),
+        'cancel_url' => route('purchase.show', ['item_id' => $item->id]),
+        'metadata' => [
+            'item_id' => $item->id,
+            'user_id' => $user->id,
+        ],
     ]);
+
+        return redirect($session->url);
 }
 
 

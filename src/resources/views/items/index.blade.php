@@ -8,8 +8,8 @@
 @section('content')
     <main class="main">
         <div class="tab">
-            <a href="{{ route('home', ['tab' => 'recommend']) }}" class="tab__item {{ request('tab', 'recommend') === 'recommend' ? 'tab__item--active' : '' }}">おすすめ</a>
-            <a href="{{ route('home', ['tab' => 'mylist']) }}" class="tab__item {{ request('tab') === 'mylist' ? 'tab__item--active' : '' }}">マイリスト</a>
+            <a href="{{ route('home', ['tab' => 'recommend', 'keyword' => request('keyword')]) }}" class="tab__item {{ request('tab', 'recommend') === 'recommend' ? 'tab__item--active' : '' }}">おすすめ</a>
+            <a href="{{ route('home', ['tab' => 'mylist', 'keyword' => request('keyword')]) }}" class="tab__item {{ request('tab') === 'mylist' ? 'tab__item--active' : '' }}">マイリスト</a>
         </div>
 
         {{-- 商品一覧 --}}
