@@ -11,6 +11,9 @@ use Laravel\Fortify\Fortify;
 use Illuminate\Http\Request;
 use Laravel\Fortify\Contracts\LogoutResponse as LogoutResponseContract;
 use App\Actions\Fortify\LogoutResponse;
+use Illuminate\Support\Facades\URL;
+use Illuminate\Auth\Notifications\VerifyEmail;
+use Illuminate\Notifications\Messages\MailMessage;
 
 class FortifyServiceProvider extends ServiceProvider
 {
@@ -49,6 +52,15 @@ class FortifyServiceProvider extends ServiceProvider
 
         Fortify::registerView(function () {
             return view('auth.register');
+        });
+
+        // メール認証設定
+        VerifyEmail::toMailUsing(function ($notifiable, $url) {
+            return (new MailMessage)
+                ->subject('メール認証を完了してください')
+                ->line('下のボタンをクリックしてメール認証を完了してください')
+                ->action('認証はこちらから', $url)
+                ->line('もしこのメールに覚えがない場合は、破棄してください');
         });
     }
 }

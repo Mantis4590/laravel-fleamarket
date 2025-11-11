@@ -13,6 +13,7 @@ use App\Http\Controllers\MyPageController;
 use Illuminate\Http\Request;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\StripeWebhookController;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 // ==============================
 // トップアクセス時（ログイン状態で振り分け）
@@ -49,7 +50,7 @@ Route::post('/logout', [CustomAuthenticatedSessionController::class, 'destroy'])
 // ==============================
 // マイページ & プロフィール
 // ==============================
-Route::middleware('auth')->group(function () {
+Route::middleware('auth', 'verified')->group(function () {
     Route::get('/mypage', [MyPageController::class, 'index'])->name('mypage.index');
     Route::get('/mypage/profile', [ProfileController::class, 'show'])->name('profile.edit');
     Route::post('/mypage/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -67,6 +68,24 @@ Route::post('/sell', [ItemController::class, 'store'])->name('items.store');
 // 送り先住所変更画面
 Route::get('/purchase/address/{item_id}', [PurchaseController::class, 'editAddress'])->name('purchase.address.edit');
 
+// stripe
 Route::post('/purchase/address/{item_id}', [PurchaseController::class, 'updateAddress'])->name('purchase.address.update');
 
 Route::post('/stripe/webhook', [StripeWebhookController::class, 'handle']);
+
+// メール認証が必要なルート例
+Route::get('/email/verify', function () {
+    return view('auth.verify-email');
+})->middleware('auth')->name('verification.notice');
+
+// 認証リンクをクリック後の処理
+Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+    $request->fulfill();
+    return redirect('/mypage/profile');
+})->middleware(['auth', 'signed'])->name('verification.verify');
+
+// 認証メール再送信
+Route::post('/email/verification-notification', function (Request $request) {
+    $request->user()->sendEmailVerificationNotification();
+    return back()->with('message', '認証メールを再送しました');
+})->middleware(['auth', 'throttle:6,1'])->name('verification.send');

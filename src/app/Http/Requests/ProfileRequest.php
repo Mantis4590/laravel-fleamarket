@@ -25,7 +25,7 @@ class ProfileRequest extends FormRequest
     {
         return [
             // プロフィール画像:jpeg or pngのみ
-            'image' => ['nullable', 'image', 'mimes:jpeg,png', 'max:2048'],
+            'image' => ['nullable', 'image', 'mimes:jpeg,png', 'max:10240'],
 
             // ユーザー名: 必須・20文字以内
             'name' => ['required', 'string', 'max:20'],

@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\RegisterRequest;
+use Illuminate\Auth\Events\Registered;
 
 class RegisterController extends Controller
 {
@@ -30,10 +31,10 @@ class RegisterController extends Controller
         // 登録したユーザーでログイン状態にする
         auth()->login($user);
 
-        // 初回登録時のフラグ
-        session(['from_register' => true]);
+        // ここでメール認証メールを送信
+        event(new Registered($user));
 
-        // 登録後はプロフィール編集画面へリダイレクト
-        return redirect('/mypage/profile');
+        // 登録後はメール認証誘導画面へリダイレクト
+        return redirect()->route('verification.notice');
     }
 }

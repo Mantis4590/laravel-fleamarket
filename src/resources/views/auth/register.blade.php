@@ -48,10 +48,6 @@
                         <p class="register__error">{{ $message }}</p>
                     @endif
                 @enderror
-
-                @error('password_confirmation')
-                    <p class="register__error">{{ $message }}</p>
-                @enderror
             </div>
 
             <button type="submit" class="register__button">登録する</button>
