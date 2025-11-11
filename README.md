@@ -7,10 +7,10 @@
 ・cd laravel-fleamarket  
 ・docker-compose up -d --build
 
-### laravel環境構築
+### Laravel環境構築
 ・docker-compose exec php bash  
 ・composer install  
-・cp .env.example .env # 環境変数をコピーして設定  
+・cp .env.example .env　# 環境変数をコピーして設定  
 ・php artisan key:generate  
 ・php artisan migrate  
 ・php artisan db:seed  
@@ -23,9 +23,9 @@
 ・phpMyAdmin：http://localhost:8080  
 ・MailHog（メール確認用）：http://localhost:8025
 
-## 使用記述（実行環境）
+## 使用技術（実行環境）
 ・PHP 8.1.x  
-・laravel 8.x  
+・Laravel 8.x  
 ・MySQL 8.0.x  
 ・nginx 1.21.x  
 ・Docker/docker-compose  
