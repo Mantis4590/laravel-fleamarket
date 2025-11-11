@@ -30,8 +30,7 @@
 ・nginx 1.21.x  
 ・Docker/docker-compose  
 ・MailHog  
-・Stripe API（決済機能）  
-・jQuery 3.7.1
+・Stripe API（決済機能）
 
 ## ER図
 ![ER図](./er.png)
