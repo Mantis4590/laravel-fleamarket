@@ -11,7 +11,14 @@ body {
     color: #000;
 }
 
-
+.login__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #000;
+    padding: 15px 40px 10px 20px;
+    gap: 20px;
+}
 
 /* メイン全体 */
 .login {

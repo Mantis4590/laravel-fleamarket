@@ -27,7 +27,9 @@ Route::get('/', function () {
 // ==============================
 // 商品関連
 // ==============================
-Route::get('/home', [ItemController::class, 'index'])->name('home');
+Route::get('/home', [ItemController::class, 'index'])
+    ->middleware(['auth', 'verified'])
+    ->name('home');
 Route::get('/guest', [ItemController::class, 'guestIndex'])->name('items.guest');
 Route::get('/item/{item_id}', [ItemController::class, 'show'])->name('item.show');
 
@@ -81,7 +83,7 @@ Route::get('/email/verify', function () {
 // 認証リンクをクリック後の処理
 Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
     $request->fulfill();
-    return redirect('/mypage/profile');
+    return redirect('/home');
 })->middleware(['auth', 'signed'])->name('verification.verify');
 
 // 認証メール再送信

@@ -110,11 +110,11 @@
                         <form action="{{ route('comment.store', $item->id) }}" method="POST" class="item-detail__comment-form">
                             @csrf
                             <div class="item-detail__textarea-message">商品へのコメント</div>
-                            <textarea name="comment" class="item-detail__textarea"></textarea>
+                            <textarea name="comment" class="item-detail__textarea" {{ $item->buyer_id ? 'disabled' : '' }}></textarea>
                             @error('comment')
                                 <p class="item-detail__error">{{ $message }}</p>
                             @enderror
-                            <button type="submit" class="item-detail__button">コメントを送信する</button>
+                            <button type="submit" class="item-detail__button {{ $item->buyer_id ? 'item-detail__button--disabled' : '' }}" {{ $item->buyer_id ? 'disabled' : '' }}>コメントを送信する</button>
                         </form>
                     @endauth
                 </section>

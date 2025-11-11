@@ -37,6 +37,7 @@ class RegisterRequest extends FormRequest
             'name.required' => 'お名前を入力してください',
             'email.required' => 'メールアドレスを入力してください',
             'email.email' => 'メールアドレスはメール形式で入力してください',
+            'email.unique' => 'このメールアドレスはすでに登録されています',
             'password.required' => 'パスワードを入力してください',
 
             // パスワードの入力規則違反

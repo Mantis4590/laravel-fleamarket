@@ -20,6 +20,16 @@ class CustomAuthenticatedSessionController extends Controller
             ->onlyInput('email');
         }
 
+        // メール認証チェック
+        if (!Auth::user()->hasVerifiedEmail()) {
+            Auth::logout();
+            $request->session()->invalidate();
+            $request->session()->regenerateToken();
+
+            return redirect()->route('verification.notice')
+                ->with('warning', 'メール認証を完了してください');
+        }
+
         $request->session()->regenerate();
 
         return redirect()->intended('/');

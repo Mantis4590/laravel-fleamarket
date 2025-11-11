@@ -6,7 +6,9 @@
 
 @section('header')
     <header class="header">
-        <img src="{{ asset('logo.svg') }}" alt="COACHTECHロゴ" class="header__logo">
+        <a href="{{ route('register') }}" class="header__logo">
+            <img src="{{ asset('logo.svg') }}" alt="COACHTECH">
+        </a>
     </header>
 @endsection
 

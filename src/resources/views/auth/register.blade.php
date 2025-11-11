@@ -7,7 +7,7 @@
 @endsection
 
 @section('header')
-    <header class="header">
+    <header class="register__header">
         <img src="{{ asset('logo.svg') }}" alt="COACHTECHロゴ" class="header__logo">
     </header>
 @endsection
