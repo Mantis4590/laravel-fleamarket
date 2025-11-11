@@ -7,32 +7,23 @@
 @section('content')
 <div class="exhibition">
     <h2 class="exhibition_title">商品の出品</h2>
-
-    {{-- エラーメッセージ --}}
-    @if ($errors->any())
-        <div class="exhibition__errors">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
-
-    <form action="{{ route('items.store') }}" method="POST" enctype="multipart/form-data" class="exhibition__form">
+    <form action="{{ route('items.store') }}" method="POST" enctype="multipart/form-data" class="exhibition__form" novalidate>
         @csrf
 
         {{-- 商品画像 --}}
         <section class="exhibition__section">
             <h3 class="exhibition__item-title">商品画像</h3>
+
             <div class="exhibition__image-border">
                 <label for="img_url" class="exhibition__image-label">画像を選択する</label>
-            <input type="file" id="img_url" name="img_url" accept="image/jpeg, image/png" hidden>
+                <input type="file" id="img_url" name="img_url" accept="image/jpeg, image/png" hidden>
+            </div>
+
             @error('img_url')
                 <p class="exhibition__error">{{ $message }}</p>
             @enderror
-            </div>
         </section>
+
 
         {{-- 商品の詳細 --}}
         <section class="exhibition__section">
@@ -54,8 +45,12 @@
                     @endforeach
 
                 </div>
-                @error('category/ids')
+                @error('category_ids')
                     <p class="exhibition__error">{{ $message }}</p>
+                @else
+                    @if ($errors->has('category_ids.*'))
+                        <p class="exhibition__error">{{ $errors->first('category_ids.*') }}</p>
+                    @endif
                 @enderror
             </div>
 
@@ -98,7 +93,7 @@
 
             <div class="exhibition__group">
                 <label for="description" class="exhibition__box">商品の説明</label>
-                <textarea name="description" id="description" class="exhibition__textarea">{{ old('descripition') }}</textarea>
+                <textarea name="description" id="description" class="exhibition__textarea">{{ old('description') }}</textarea>
                 @error('description')
                     <p class="exhibition__error">{{ $message }}</p>
                 @enderror
@@ -108,7 +103,7 @@
                 <label for="price" class="exhibition__box">販売価格</label>
                 <div class="exhibition__price-box">
                     <span>¥</span>
-                    <input type="number" name="price" id="price" class="exhibition__input-price" value="{{ old('price') }}">
+                    <input type="text" name="price" id="price" class="exhibition__input-price" value="{{ old('price') }}">
                 </div>
                 @error('price')
                     <p class="exhibition__error">{{ $message }}</p>

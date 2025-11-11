@@ -189,8 +189,8 @@
 
 /*販売価格入力*/
 .exhibition__price-box {
-    width: 100%;
     position: relative;
+    width: 100%;
 }
 
 .exhibition__price-box span {
@@ -198,18 +198,22 @@
     left: 12px;
     top: 50%;
     transform: translateY(-50%);
-    color: #666;
-    font-size: 14px;
+    color: #333;
+    font-size: 16px;
+    pointer-events: none;
+    /* クリックを邪魔しない */
 }
 
 .exhibition__input-price {
-    flex: 1;
+    width: 100%;
     padding: 10px 10px 10px 30px;
+    /* ← 左余白で¥を避ける */
     border: 1px solid #ccc;
     border-radius: 4px;
-    font-size: 14px;
-    width: 100%;
-
+    font-size: 16px;
+    box-sizing: border-box;
+    background: #fff;
+    outline: none;
 }
 
 /*出品ボタン*/
