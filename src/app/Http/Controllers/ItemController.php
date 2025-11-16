@@ -11,54 +11,69 @@ use App\Models\Category;
 class ItemController extends Controller
 {
     public function index(Request $request)
-{
-    $tab = $request->query('tab', 'recommend');
-    $keyword = $request->input('keyword'); // 検索ワードを取得
-
-    if ($tab === 'mylist') {
-        if (Auth::check()) {
-            $query = Item::whereHas('likes', function ($likeQuery) {
-                $likeQuery->where('user_id', Auth::id());
-            });
-        } else {
-            $items = collect();
-            return view('items.index', compact('tab', 'items'));
+    {
+        // メール未認証なら強制的に誘導画面へ
+        if (Auth::check() && !Auth::user()->hasVerifiedEmail()) {
+            return redirect()->route('verification.notice');
         }
-    } else {
+        $tab = $request->query('tab', 'recommend');
+        $keyword = $request->input('keyword'); // 検索ワードを取得
+
+        if ($tab === 'mylist') {
+            if (Auth::check()) {
+                $query = Item::whereHas('likes', function ($likeQuery) {
+                $likeQuery->where('user_id', Auth::id());
+                });
+            } else {
+                $items = collect();
+                return view('items.index', compact('tab', 'items'));
+            }
+        } else {
+            $query = Item::query();
+
+            // 自分が出品した商品を除外
+            if (Auth::check()) {
+                $query->where('user_id', '!=', Auth::id());
+            }
+        }
+
+        // 🔍 部分一致検索
+        if ($keyword) {
+            $query->where('name', 'like', "%{$keyword}%");
+        }
+
+        $items = $query->get();
+
+        return view('items.index', compact('tab', 'items', 'keyword'));
+    }
+
+
+    public function guestIndex(Request $request)
+    {
+        $keyword = $request->input('keyword');
         $query = Item::query();
 
-        // 自分が出品した商品を除外
-        if (Auth::check()) {
-            $query->where('user_id', '!=', Auth::id());
+        // 部分一致検索
+        if (!empty($keyword)) {
+            $query->where('name', 'like', "%{$keyword}%");
         }
+
+        $items = $query->get();
+
+        return view('items.index_guest', compact('items', 'keyword'));
     }
 
-    // 🔍 部分一致検索
-    if ($keyword) {
-        $query->where('name', 'like', "%{$keyword}%");
+    public function show($item_id)
+{
+    $item = Item::with(['categories', 'comments.user', 'likes'])->findOrFail($item_id);
+
+    if (auth()->check()) {
+        return view('items.show', compact('item'));
+    } else {
+        return view('items.show_guest', compact('item'));
     }
-
-    $items = $query->get();
-
-    return view('items.index', compact('tab', 'items', 'keyword'));
 }
 
-
-    public function guestIndex() {
-        $items = Item::all();
-
-        return view('items.index_guest', compact('items'));
-    }
-
-    public function show($item_id) {
-        $item = Item::with(['categories', 'comments.user', 'likes'])->findOrFail($item_id);
-
-        if (auth()->check()) {
-            return view('items.show', compact('item'));
-        } else {
-            return view('items.show_guest', compact('item'));
-        }
-    }
 
     public function store(ExhibitionRequest $request) {
         // validated() で安全なデータのみ取得

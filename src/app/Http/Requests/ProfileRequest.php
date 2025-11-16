@@ -45,6 +45,7 @@ class ProfileRequest extends FormRequest
             // 画像
             'image.image' => '画像ファイルを選択してください',
             'image.mimes' => 'プロフィール画像はjpegまたはpng形式でアップロードしてください',
+            'image.max' => '画像は10240キロバイト以下である必要があります',
 
             // ユーザー名
             'name.required' => 'ユーザー名を入力してください',

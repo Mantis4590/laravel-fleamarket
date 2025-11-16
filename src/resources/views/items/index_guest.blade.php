@@ -9,8 +9,8 @@
     {{-- 商品一覧 --}}
     <main class="product-list">
         <div class="tab">
-            <a href="{{ route('home', ['tab' => 'recommend', 'keyword' => request('keyword')]) }}" class="tab__item {{ request('tab', 'recommend') === 'recommend' ? 'tab__item--active' : '' }}">おすすめ</a>
-            <a href="{{ route('home', ['tab' => 'mylist', 'keyword' => request('keyword')]) }}" class="tab__item {{ request('tab') === 'mylist' ? 'tab__item--active' : '' }}">マイリスト</a>
+            <a href="{{ route('items.guest', ['tab' => 'recommend', 'keyword' => request('keyword')]) }}" class="tab__item {{ request('tab', 'recommend') === 'recommend' ? 'tab__item--active' : '' }}">おすすめ</a>
+            <a href="{{ route('items.guest', ['tab' => 'mylist', 'keyword' => request('keyword')]) }}" class="tab__item {{ request('tab') === 'mylist' ? 'tab__item--active' : '' }}">マイリスト</a>
         </div>
         {{-- 商品一覧 --}}
         <section class="item-list">
@@ -28,7 +28,7 @@
                         
                         {{-- 購入済みでSOLD表示 --}}
                         @if (!empty($item->buyer_id))
-                            <span class="item-card__sold">SOLD</span>
+                            <span class="item-card__sold">Sold</span>
                         @endif
                     </div>
                 </a>

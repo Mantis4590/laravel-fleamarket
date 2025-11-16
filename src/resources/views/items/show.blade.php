@@ -19,9 +19,9 @@
                     <div class="item-detail__noimage">商品画像</div>
                 @endif
 
-                {{-- SOLD表示だけ（未購入なら何も表示しない） --}}
+                {{-- Sold表示だけ（未購入なら何も表示しない） --}}
                 @if ($item->buyer_id)
-                    <p class="item-detail__sold">SOLD</p>
+                    <p class="item-detail__sold">Sold</p>
                 @endif
             </div>
 

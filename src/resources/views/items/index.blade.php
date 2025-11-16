@@ -27,7 +27,7 @@
 
                             {{-- 購入済みでSOLD表示 --}}
                             @if (!empty($item->buyer_id))
-                                <span class="item-card__sold">SOLD</span>
+                                <span class="item-card__sold">Sold</span>
                             @endif
                         </div>
                     </a>

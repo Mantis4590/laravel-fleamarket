@@ -25,7 +25,7 @@ class LoginController extends Controller
 
         // 入力情報が間違っている場合
         return back()->withErrors([
-            'email' => 'ログイン情報が登録されていません。',
+            'email' => 'ログイン情報が登録されていません',
         ]);
     }
 

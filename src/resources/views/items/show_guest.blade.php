@@ -18,7 +18,7 @@
 
                 {{-- SOLD表示だけ（未購入なら何も表示しない） --}}
                 @if ($item->buyer_id)
-                    <p class="item-detail__sold">SOLD</p>
+                    <p class="item-detail__sold">Sold</p>
                 @endif
             </div>
 
