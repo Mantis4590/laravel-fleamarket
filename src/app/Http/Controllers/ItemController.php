@@ -50,18 +50,27 @@ class ItemController extends Controller
 
     public function guestIndex(Request $request)
     {
+        $tab = $request->query('tab', 'recommend');
         $keyword = $request->input('keyword');
+
+        // ▼ 1. マイリストタブ（未ログイン時は空にする）
+        if ($tab === 'mylist') {
+            $items = collect(); // 空の一覧
+            return view('items.index_guest', compact('items', 'tab', 'keyword'));
+        }
+
+        // ▼ 2. おすすめタブ（全件 or 検索）
         $query = Item::query();
 
-        // 部分一致検索
         if (!empty($keyword)) {
             $query->where('name', 'like', "%{$keyword}%");
         }
 
         $items = $query->get();
 
-        return view('items.index_guest', compact('items', 'keyword'));
+        return view('items.index_guest', compact('items', 'tab', 'keyword'));
     }
+
 
     public function show($item_id)
 {

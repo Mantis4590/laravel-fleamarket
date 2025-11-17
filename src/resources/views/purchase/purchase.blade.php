@@ -49,7 +49,7 @@
                 <div class="purchase__address">
                     <p>〒 {{ $user->postcode }}</p>
                     <p>{{ $user->address }}</p>
-                    
+                    <p>{{ $user->building }}</p>
                 </div>
             </div>
         </div>

@@ -11,6 +11,8 @@ use Tests\TestCase;
 
 class ItemShowTest extends TestCase
 {
+    use RefreshDatabase;
+
     /** @test */
     public function 商品詳細ページで必要な情報が取得できる()
     {

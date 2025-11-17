@@ -9,6 +9,8 @@ use App\Models\Item;
 
 class LikeTest extends TestCase
 {
+    use RefreshDatabase;
+
     /** @test */
     public function いいねを追加できる()
     {
