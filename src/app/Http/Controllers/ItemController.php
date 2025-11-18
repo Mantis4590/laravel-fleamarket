@@ -73,15 +73,15 @@ class ItemController extends Controller
 
 
     public function show($item_id)
-{
-    $item = Item::with(['categories', 'comments.user', 'likes'])->findOrFail($item_id);
+    {
+        $item = Item::with(['categories', 'comments.user', 'likes'])->findOrFail($item_id);
 
-    if (auth()->check()) {
+        if (auth()->check()) {
         return view('items.show', compact('item'));
-    } else {
-        return view('items.show_guest', compact('item'));
+        } else {
+            return view('items.show_guest', compact('item'));
+        }
     }
-}
 
 
     public function store(ExhibitionRequest $request) {

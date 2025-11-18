@@ -7,7 +7,6 @@
 @section('content')
 <div class="address">
     <h2 class="address__title">住所の変更</h2>
-
     <form action="{{ route('purchase.address.update', ['item_id' => $item->id]) }}" method="POST" class="address__form">
         @csrf
         <div class="address__group">
@@ -31,7 +30,6 @@
             <input type="text" name="building" id="building" class="address__input" value="{{ old('building', $user->building) }}">
         </div>
         <button type="submit" class="address__button">更新する</button>
-
     </form>
 </div>
 @endsection

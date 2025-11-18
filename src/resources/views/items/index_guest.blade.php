@@ -6,20 +6,20 @@
 @endsection
 
 @section('content')
+{{-- 商品一覧 --}}
+<main class="product-list">
+    <div class="tab">
+        <a href="{{ route('items.guest', ['tab' => 'recommend', 'keyword' => request('keyword')]) }}" class="tab__item {{ request('tab', 'recommend') === 'recommend' ? 'tab__item--active' : '' }}">おすすめ</a>
+        <a href="{{ route('items.guest', ['tab' => 'mylist', 'keyword' => request('keyword')]) }}" class="tab__item {{ request('tab') === 'mylist' ? 'tab__item--active' : '' }}">マイリスト</a>
+    </div>
+
     {{-- 商品一覧 --}}
-    <main class="product-list">
-        <div class="tab">
-            <a href="{{ route('items.guest', ['tab' => 'recommend', 'keyword' => request('keyword')]) }}" class="tab__item {{ request('tab', 'recommend') === 'recommend' ? 'tab__item--active' : '' }}">おすすめ</a>
-            <a href="{{ route('items.guest', ['tab' => 'mylist', 'keyword' => request('keyword')]) }}" class="tab__item {{ request('tab') === 'mylist' ? 'tab__item--active' : '' }}">マイリスト</a>
-        </div>
-        {{-- 商品一覧 --}}
-        <section class="item-list">
-            @foreach ($items as $item)
+    <section class="item-list">
+        @foreach ($items as $item)
             <div class="item-card">
                 {{-- 画像ラッパとimgクラスは任意（見やすく） --}}
                 <a href="{{ route('item.show', ['item_id' => $item->id]) }}">
                     <div class="item-card__img">
-                    
                         @if (!empty($item->img_url))
                             <img src="{{ asset('storage/' . $item->img_url) }}" alt="{{ $item->name }}" class="item-card__image">
                         @else
@@ -32,9 +32,9 @@
                         @endif
                     </div>
                 </a>
-            <p class="item-card__name">{{ $item->name }}</p>
-        </div>
+                <p class="item-card__name">{{ $item->name }}</p>
+            </div>
         @endforeach
-        </section>
-    </main>
+    </section>
+</main>
 @endsection

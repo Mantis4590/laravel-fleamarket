@@ -42,11 +42,32 @@ class PurchaseController extends Controller
         // ★ テスト環境：payment_method を強制セットし、validated は使わない
         if (app()->environment('testing')) {
 
-        // 住所未登録チェック（必要なら残す）
+            // 住所未登録チェック（必要なら残す）
+            if (empty($user->address) || empty($user->postcode)) {
+                return back()->with('error', 'プロフィールに配送先住所を登録してください');
+            }
+
+            $item->update([
+                'buyer_id'          => $user->id,
+                'shipping_postcode' => $user->postcode,
+                'shipping_address'  => $user->address,
+                'shipping_building' => $user->building,
+            ]);
+
+            return redirect()->route('home');
+        }
+
+        // 住所が未登録ならエラー返す
         if (empty($user->address) || empty($user->postcode)) {
             return back()->with('error', 'プロフィールに配送先住所を登録してください');
         }
 
+        // 購入済みチェック
+        if ($item->buyer_id) {
+            return redirect()->route('home')->with('error', 'この商品はすでに購入されています');
+        }
+
+        // 本番 Stripe 前に住所保存
         $item->update([
             'buyer_id'          => $user->id,
             'shipping_postcode' => $user->postcode,
@@ -54,57 +75,34 @@ class PurchaseController extends Controller
             'shipping_building' => $user->building,
         ]);
 
-        return redirect()->route('home');
-    }
+        // Stripe 本番処理
+        \Stripe\Stripe::setApiKey(config('services.stripe.secret'));
 
+        $stripe_payment_type = $payment_method === 'カード払い' ? 'card' : 'konbini';
 
-
-    // 住所が未登録ならエラー返す
-    if (empty($user->address) || empty($user->postcode)) {
-        return back()->with('error', 'プロフィールに配送先住所を登録してください');
-    }
-
-    // 購入済みチェック
-    if ($item->buyer_id) {
-        return redirect()->route('home')->with('error', 'この商品はすでに購入されています');
-    }
-
-    // 本番 Stripe 前に住所保存
-    $item->update([
-        'buyer_id'          => $user->id,
-        'shipping_postcode' => $user->postcode,
-        'shipping_address'  => $user->address,
-        'shipping_building' => $user->building,
-    ]);
-
-    // Stripe 本番処理
-    \Stripe\Stripe::setApiKey(config('services.stripe.secret'));
-
-    $stripe_payment_type = $payment_method === 'カード払い' ? 'card' : 'konbini';
-
-    $session = \Stripe\Checkout\Session::create([
-        'payment_method_types' => [$stripe_payment_type],
-        'line_items' => [[
-            'price_data' => [
-                'currency' => 'jpy',
-                'product_data' => [
-                    'name' => $item->name,
+        $session = \Stripe\Checkout\Session::create([
+            'payment_method_types' => [$stripe_payment_type],
+            'line_items' => [[
+                'price_data' => [
+                    'currency' => 'jpy',
+                    'product_data' => [
+                        'name' => $item->name,
+                    ],
+                    'unit_amount' => $item->price,
                 ],
-                'unit_amount' => $item->price,
+                'quantity' => 1,
+            ]],
+            'mode' => 'payment',
+            'success_url' => route('home'),
+            'cancel_url' => route('purchase.show', ['item_id' => $item->id]),
+            'metadata' => [
+                'item_id' => $item->id,
+                'user_id' => $user->id,
             ],
-            'quantity' => 1,
-        ]],
-        'mode' => 'payment',
-        'success_url' => route('home'),
-        'cancel_url' => route('purchase.show', ['item_id' => $item->id]),
-        'metadata' => [
-            'item_id' => $item->id,
-            'user_id' => $user->id,
-        ],
-    ]);
+        ]);
 
-    return redirect($session->url);
-}
+        return redirect($session->url);
+    }
 
 
 

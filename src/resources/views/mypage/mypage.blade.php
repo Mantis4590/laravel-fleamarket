@@ -4,7 +4,6 @@
 
 @section('css')
 <link rel="stylesheet" href="{{ asset('css/mypage.css') }}">
-
 @endsection
 
 @section('content')
@@ -20,7 +19,6 @@
             </div>
             <h2 class="mypage__name">{{ $user->name }}</h2>
         </div>
-
         <a href="{{ route('profile.edit') }}" class="mypage__edit-btn">プロフィールを編集</a>
     </div>
 
@@ -28,7 +26,7 @@
         <a href="{{ route('mypage.index', ['page' => 'sell']) }}" class="mypage__tab {{ $page === 'sell' ? 'mypage__tab--active' : '' }}">出品した商品</a>
         <a href="{{ route('mypage.index', ['page' => 'buy']) }}" class="mypage__tab {{ $page === 'buy' ? 'mypage__tab--active' : '' }}">購入した商品</a>
     </div>
-
+    
     <div class="mypage__item-list">
         @foreach($items as $item)
             <div class="mypage__item-card">
@@ -44,6 +42,5 @@
             </div>
         @endforeach
     </div>
-
 </div>
 @endsection

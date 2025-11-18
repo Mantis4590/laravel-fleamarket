@@ -24,13 +24,11 @@
             @enderror
         </section>
 
-
         {{-- 商品の詳細 --}}
         <section class="exhibition__section">
             <div class="exhibition__section-border">
                 <div class="exhibition__subtitle">商品の詳細</div>
             </div>
-            
 
             {{-- カテゴリー --}}
             <div class="exhibition__group">
@@ -67,7 +65,6 @@
                 @error('condition')
                     <p class="exhibition__error">{{ $message }}</p>
                 @enderror
-                
             </div>
         </section>
 
@@ -76,7 +73,6 @@
             <div class="exhibition__section-border">
                 <div class="exhibition__subtitle">商品名と説明</div>
             </div>
-            
 
             <div class="exhibition__group">
                 <label for="name" class="exhibition__box">商品名</label>

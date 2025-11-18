@@ -13,11 +13,12 @@
 </head>
 <body>
     @section('header')
-        <header class="header">
+    <header class="header">
+        
     {{-- 左：ロゴ --}}
     <div class="header__left">
         <a href="{{ auth()->check() ? route('home') : route('items.guest') }}">
-            <img src="{{ asset('logo.svg') }}" alt="COACHTECHロゴ" class="header__logo">
+        <img src="{{ asset('logo.svg') }}" alt="COACHTECHロゴ" class="header__logo">
         </a>
     </div>
 
@@ -34,19 +35,24 @@
         <nav class="header__nav">
             @auth
                 <form action="{{ route('logout') }}" method="POST" class="header__logout-form">
-                    @csrf
-                    <button type="submit" class="header__link header__link--logout">ログアウト</button>
+                @csrf
+                <button type="submit" class="header__link header__link--logout">ログアウト
+                </button>
                 </form>
-                <a href="{{ route('mypage.index') }}" class="header__link">マイページ</a>
-                <a href="{{ route('items.create') }}" class="header__button">出品</a>
+                <a href="{{ route('mypage.index') }}" class="header__link">マイページ
+                </a>
+                <a href="{{ route('items.create') }}" class="header__button">出品
+                </a>
             @else
-                <a href="{{ route('login') }}" class="header__link header__link--login">ログイン</a>
-                <a href="/mypage" class="header__link">マイページ</a>
+                <a href="{{ route('login') }}" class="header__link header__link--login">ログイン
+                </a>
+                <a href="/mypage" class="header__link">マイページ
+                </a>
                 <a href="{{ route('login') }}" class="header__button">出品</a>
             @endauth
         </nav>
     </div>
-</header>
+    </header>
 
     @show
 

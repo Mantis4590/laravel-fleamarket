@@ -22,7 +22,6 @@
                 @endif
             </div>
 
-
             <div class="item-detail__right">
                 <h2 class="item-detail__name">{{ $item->name }}</h2>
                 <p>ブランド: {{ $item->brand ?: '無し' }}</p>
@@ -73,7 +72,6 @@
 
                 <section class="item-detail__section">
                     <h3 class="item-detail__subtitle">コメント({{ $item->comments->count() }})</h3>
-
                     @foreach($item->comments as $comment)
                         <div class="item-detail__comment">
                             <div class="item-detail__comment-user">

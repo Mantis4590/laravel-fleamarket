@@ -44,7 +44,6 @@
                     <h3 class="purchase__title">配送先
                         <a href="{{ route('purchase.address.edit', ['item_id' => $item->id]) }}" class="purchase__change-like">変更する</a>
                     </h3>
-                    
                 </div>
                 <div class="purchase__address">
                     <p>〒 {{ $user->postcode }}</p>
@@ -69,7 +68,6 @@
                 </table>
             </div>
 
-            
             <div class="purchase__btn">
                 <button type="submit" formaction="{{ route('purchase.store', ['item_id' => $item->id]) }}" formmethod="POST" class="purchase__button">購入する
                 </button>
