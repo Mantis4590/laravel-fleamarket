@@ -7,14 +7,23 @@
 ・cd laravel-fleamarket  
 ・docker-compose up -d --build
 
-### Laravel環境構築
-・docker-compose exec php bash  
-・composer install  
-・cp .env.example .env　# 環境変数をコピーして設定  
-・php artisan key:generate  
-・php artisan migrate  
-・php artisan db:seed  
-・php artisan storage:link
+## Laravel環境構築
+
+docker-compose exec php bash  
+composer install  
+cp .env.example .env  
+
+※ DB設定を以下のように設定  
+DB_DATABASE=laravel_db  
+DB_USERNAME=laravel_user  
+DB_PASSWORD=laravel_pass  
+
+php artisan key:generate  
+php artisan storage:link  
+php artisan migrate:fresh --seed  
+
+## テスト実行
+php artisan test
 
 ### 開発環境URL
 ・トップページ：http://localhost/  
