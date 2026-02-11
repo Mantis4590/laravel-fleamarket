@@ -59,8 +59,9 @@
     {{-- ===============================
         メインコンテンツ
     =============================== --}}
-    <main class="main">
+    <main class="main @yield('main_class')">
         @yield('content')
     </main>
+
 </body>
 </html>

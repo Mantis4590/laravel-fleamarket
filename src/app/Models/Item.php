@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Item extends Model
 {
@@ -39,5 +40,19 @@ class Item extends Model
 {
     return $this->belongsToMany(Category::class, 'category_item');
 }
+    public function transactionMessages(): HasMany
+    {
+        return $this->hasMany(\App\Models\TransactionMessage::class)->latest();
+    }
+
+    public function seller()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function buyer()
+    {
+        return $this->belongsTo(User::class, 'buyer_id');
+    }
 
 }

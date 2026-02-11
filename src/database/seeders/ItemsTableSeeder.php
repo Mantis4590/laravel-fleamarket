@@ -16,6 +16,7 @@ class ItemsTableSeeder extends Seeder
     {
         $item = Item::create([
             'user_id' => 1,
+            'buyer_id' => 2,
             'name' => '腕時計',
             'price' => 15000,
             'brand' => 'Rolax',

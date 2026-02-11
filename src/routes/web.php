@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\StripeWebhookController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use App\Http\Controllers\TransactionChatController;
 
 // ==============================
 // トップアクセス時（ログイン状態で振り分け）
@@ -47,9 +48,6 @@ Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
 Route::post('/logout', [CustomAuthenticatedSessionController::class, 'destroy'])->name('logout');
 
-// ==============================
-// マイページ & プロフィール
-// ==============================
 Route::middleware('auth', 'verified')->group(function () {
     Route::get('/mypage', [MyPageController::class, 'index'])->name('mypage.index');
     Route::get('/mypage/profile', [ProfileController::class, 'show'])->name('profile.edit');
@@ -57,7 +55,14 @@ Route::middleware('auth', 'verified')->group(function () {
     // 購入画面
     Route::get('/purchase/{item_id}',[PurchaseController::class, 'show'])->name('purchase.show');
     Route::post('/purchase/{item_id}', [PurchaseController::class, 'store'])->name('purchase.store');
+});
 
+Route::middleware('auth')->group(function () {
+    Route::get('/transactions/{item}', [TransactionChatController::class, 'show'])
+        ->name('transactions.chat');
+
+    Route::post('/transactions/{item}/messages', [TransactionChatController::class, 'store'])
+        ->name('transactions.messages.store');
 });
 
 // 出品画面
