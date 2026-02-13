@@ -22,6 +22,9 @@ class Item extends Model
         'shipping_postcode',
         'shipping_address',
         'shipping_building',
+        'buyer_last_read_at',
+        'seller_last_read_at',
+        'last_message_at',
     ];
 
     public function likedByUsers() {

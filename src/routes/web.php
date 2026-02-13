@@ -63,6 +63,15 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/transactions/{item}/messages', [TransactionChatController::class, 'store'])
         ->name('transactions.messages.store');
+
+    Route::patch('/transactions/{item}/messages/{message}', [TransactionChatController::class, 'update'])
+        ->name('transactions.messages.update');
+
+    Route::delete('/transactions/{item}/messages/{message}', [TransactionChatController::class, 'destroy'])
+        ->name('transactions.messages.destroy');
+
+    Route::post('/transactions/{item}/rating', [TransactionChatController::class, 'storeRating'])
+        ->name('transactions.rating.store');
 });
 
 // 出品画面

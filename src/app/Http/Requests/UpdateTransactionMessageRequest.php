@@ -3,29 +3,18 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Auth;
 
-class StoreTransactionMessageRequest extends FormRequest
+class UpdateTransactionMessageRequest extends FormRequest
 {
     public function authorize(): bool
     {
-        $item = $this->route('item');
-
-        if (!$item) {
-            return false;
-        }
-
-        $userId = Auth::id();
-
-        return $item->user_id === $userId
-            || $item->buyer_id === $userId;
+        return true; // 本人チェックはController側
     }
 
     public function rules(): array
     {
         return [
             'body' => ['required', 'string', 'max:400'],
-            'image' => ['nullable', 'image', 'mimes:jpeg,jpg,png'],
         ];
     }
 
@@ -34,7 +23,6 @@ class StoreTransactionMessageRequest extends FormRequest
         return [
             'body.required' => '本文を入力してください',
             'body.max' => '本文は400文字以内で入力してください',
-            'image.mimes' => '「.png」または「.jpeg」形式でアップロードしてください',
         ];
     }
 }

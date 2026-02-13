@@ -95,7 +95,7 @@
     font-weight: 800;
 }
 
-.transaction-chat__complete-button {
+.transaction-chat__complete-button-link {
     background: #ff8c8c;
     color: #fff;
     border: none;
@@ -103,6 +103,8 @@
     border-radius: 20px;
     font-weight: 700;
     cursor: pointer;
+    text-decoration: none;
+    font-size: 14px;
 }
 
 .transaction-chat__item-card {
@@ -259,4 +261,112 @@
     color: #ff5a5a;
     font-size: 14px;
     margin: 0 0 6px;
+}
+
+.transaction-chat__avatar,
+.transaction-chat__avatar-sm {
+    overflow: hidden;
+}
+
+.transaction-chat__avatar img,
+.transaction-chat__avatar-sm img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.transaction-chat__modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, .25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.transaction-chat__modal {
+    width: 520px;
+    max-width: calc(100vw - 32px);
+    background: #f7f5e7;
+    border: 1px solid #777;
+    border-radius: 8px;
+    padding: 22px 22px 18px;
+}
+
+.transaction-chat__modal-title {
+    font-size: 22px;
+    font-weight: 800;
+    margin-bottom: 10px;
+}
+
+.transaction-chat__modal-sub {
+    font-size: 13px;
+    color: #666;
+    margin-bottom: 14px;
+}
+
+.transaction-chat__stars {
+    display: inline-flex;
+    flex-direction: row-reverse;
+    gap: 10px;
+    margin: 8px 0 18px;
+}
+
+.transaction-chat__star-input {
+    display: none;
+}
+
+.transaction-chat__star-label {
+    font-size: 56px;
+    line-height: 1;
+    color: #cfcfcf;
+    cursor: pointer;
+}
+
+.transaction-chat__star-input:checked~.transaction-chat__star-label {
+    color: #f0dc4a;
+}
+
+.transaction-chat__star-label:hover,
+.transaction-chat__star-label:hover~.transaction-chat__star-label {
+    color: #f0dc4a;
+}
+
+.transaction-chat__modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 8px;
+}
+
+.transaction-chat__modal-cancel {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 14px;
+    border-radius: 6px;
+    color: #666;
+    text-decoration: none;
+}
+
+.transaction-chat__modal-submit {
+    background: #ff8c8c;
+    color: #fff;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.transaction-chat__image img {
+    max-width: 200px;
+    border-radius: 8px;
+    margin-top: 8px;
+}
+
+.transaction-chat_form-error {
+    color: #ff4d4f;
+    font-size: 13px;
 }

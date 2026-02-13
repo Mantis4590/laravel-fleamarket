@@ -1,0 +1,83 @@
+.transaction-rating {
+    min-height: calc(100vh - 80px);
+    display: flex;
+    justify-content: center;
+    padding-top: 180px;
+    background: rgba(0, 0, 0, 0.04);
+}
+
+.transaction-rating__panel {
+    width: 520px;
+    max-width: calc(100% - 24px);
+    background: #f7f6e8;
+    border: 1px solid #777;
+    border-radius: 8px;
+    padding: 24px 26px;
+}
+
+.transaction-rating__title {
+    font-size: 22px;
+    font-weight: 800;
+    margin-bottom: 10px;
+}
+
+.transaction-rating__subtitle {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 16px;
+}
+
+.transaction-rating__actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 16px;
+}
+
+.transaction-rating__submit {
+    background: #ff8c8c;
+    border: none;
+    color: #fff;
+    padding: 10px 16px;
+    border-radius: 6px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+/* エラー */
+.transaction-rating__errors {
+    margin: 10px 0 8px;
+}
+
+.transaction-rating__error {
+    color: #d33;
+    font-size: 12px;
+    margin: 2px 0;
+}
+
+/* 星評価：クリックで色が変わる（CSSのみ） */
+.star-rating {
+    display: inline-flex;
+    flex-direction: row-reverse;
+    gap: 10px;
+    user-select: none;
+}
+
+.star-rating__input {
+    display: none;
+}
+
+.star-rating__label {
+    font-size: 56px;
+    line-height: 1;
+    color: #cfcfcf;
+    cursor: pointer;
+}
+
+.star-rating__label:hover,
+.star-rating__label:hover~.star-rating__label {
+    color: #ffd54a;
+}
+
+.star-rating__input:checked~.star-rating__label {
+    color: #ffd54a;
+}

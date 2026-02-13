@@ -17,7 +17,19 @@
                     <div class="mypage__icon--default"></div>
                 @endif
             </div>
-            <h2 class="mypage__name">{{ $user->name }}</h2>
+            {{-- 名前＋評価をまとめる --}}
+            <div class="mypage__name-area">
+                <h2 class="mypage__name">{{ $user->name }}</h2>
+
+                @if(!is_null($avgRatingRounded))
+                <div class="mypage__rating">
+                    @for($i = 1; $i <= 5; $i++)
+                        <span class="mypage__star {{ $i <= $avgRatingRounded ? 'is-filled' : '' }}">★</span>
+                    @endfor
+                </div>
+            @endif
+        </div>
+
         </div>
         <a href="{{ route('profile.edit') }}" class="mypage__edit-btn">プロフィールを編集</a>
     </div>
@@ -28,6 +40,9 @@
         <a href="{{ route('mypage.index', ['page' => 'transaction']) }}"
         class="mypage__tab {{ $page === 'transaction' ? 'mypage__tab--active' : '' }}">
         取引中の商品
+        @if($unreadTransactionCount > 0)
+            <span class="mypage__tab-badge">{{ $unreadTransactionCount }}</span>
+        @endif
         </a>
     </div>
     
@@ -44,16 +59,34 @@
                 <div class="mypage__item-card">
             @endif
 
-                <div class="mypage__item-img">
-                    @if (!empty($item->img_url))
-                        {{-- ここ、今のseedは "images/..." で storage じゃないから asset() が正しい --}}
-                        <img src="{{ asset($item->img_url) }}" alt="{{ $item->name }}" class="item-card__image">
-                    @else
-                        <div class="item-card__noimage">商品画像</div>
-                    @endif
-                </div>
+            @php
+                $imgPath = $item->img_url;
 
-                <p class="mypage__item-name">{{ $item->name }}</p>
+                $isInPublic = $imgPath && file_exists(public_path($imgPath));
+                $isInStorage = $imgPath && \Illuminate\Support\Facades\Storage::disk('public')->exists($imgPath);
+
+                if ($isInPublic) {
+                    $imgSrc = asset($imgPath);
+                } elseif ($isInStorage) {
+                    $imgSrc = asset('storage/' . $imgPath);
+                } else {
+                    $imgSrc = null;
+                }
+            @endphp
+
+            <div class="mypage__item-img">
+                @if($page === 'transaction' && !empty($item->unread_count) && $item->unread_count > 0)
+                    <span class="mypage__item-badge">{{ $item->unread_count }}</span>
+                @endif
+
+                @if($imgSrc)
+                    <img src="{{ $imgSrc }}" alt="{{ $item->name }}" class="item-card__image">
+                @else
+                    <div class="item-card__noimage">商品画像</div>
+                @endif
+            </div>
+
+            <p class="mypage__item-name">{{ $item->name }}</p>
 
             @if($link)
                 </a>

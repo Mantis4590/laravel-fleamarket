@@ -4,6 +4,8 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\Item;
+use App\Models\User;
+
 
 class ItemsTableSeeder extends Seeder
 {
@@ -14,9 +16,12 @@ class ItemsTableSeeder extends Seeder
      */
     public function run()
     {
+        $sellerA = User::where('email', 'seller_a@example.com')->firstOrFail();
+        $sellerB = User::where('email', 'seller_b@example.com')->firstOrFail();
+
+        // --- C001〜C005：出品者A ---
         $item = Item::create([
-            'user_id' => 1,
-            'buyer_id' => 2,
+            'user_id' => $sellerA->id,
             'name' => '腕時計',
             'price' => 15000,
             'brand' => 'Rolax',
@@ -27,7 +32,7 @@ class ItemsTableSeeder extends Seeder
         $item->categories()->attach([1, 5]);
 
         $item = Item::create([
-            'user_id' => 2,
+            'user_id' => $sellerA->id,
             'name' => 'HDD',
             'price' => 5000,
             'brand' => '西芝',
@@ -35,10 +40,10 @@ class ItemsTableSeeder extends Seeder
             'img_url' => 'images/image_2.jpg',
             'condition' => '目立った傷や汚れなし',
         ]);
-        $item->categories()->attach([2,16]);
+        $item->categories()->attach([2, 16]);
 
         $item = Item::create([
-            'user_id' => 3,
+            'user_id' => $sellerA->id,
             'name' => '玉ねぎ3束',
             'price' => 300,
             'brand' => null,
@@ -49,7 +54,7 @@ class ItemsTableSeeder extends Seeder
         $item->categories()->attach([6]);
 
         $item = Item::create([
-            'user_id' => 4,
+            'user_id' => $sellerA->id,
             'name' => '革靴',
             'price' => 4000,
             'brand' => null,
@@ -60,7 +65,7 @@ class ItemsTableSeeder extends Seeder
         $item->categories()->attach([1]);
 
         $item = Item::create([
-            'user_id' => 5,
+            'user_id' => $sellerA->id,
             'name' => 'ノートPC',
             'price' => 45000,
             'brand' => null,
@@ -70,8 +75,9 @@ class ItemsTableSeeder extends Seeder
         ]);
         $item->categories()->attach([2]);
 
+        // --- C006〜C010：出品者B ---
         $item = Item::create([
-            'user_id' => 6,
+            'user_id' => $sellerB->id,
             'name' => 'マイク',
             'price' => 8000,
             'brand' => null,
@@ -82,7 +88,7 @@ class ItemsTableSeeder extends Seeder
         $item->categories()->attach([16]);
 
         $item = Item::create([
-            'user_id' => 7,
+            'user_id' => $sellerB->id,
             'name' => 'ショルダーバッグ',
             'price' => 3500,
             'brand' => null,
@@ -93,7 +99,7 @@ class ItemsTableSeeder extends Seeder
         $item->categories()->attach([1]);
 
         $item = Item::create([
-            'user_id' => 8,
+            'user_id' => $sellerB->id,
             'name' => 'タンブラー',
             'price' => 500,
             'brand' => null,
@@ -104,7 +110,7 @@ class ItemsTableSeeder extends Seeder
         $item->categories()->attach([2, 12]);
 
         $item = Item::create([
-            'user_id' => 9,
+            'user_id' => $sellerB->id,
             'name' => 'コーヒーミル',
             'price' => 4000,
             'brand' => 'Starbacks',
@@ -115,7 +121,7 @@ class ItemsTableSeeder extends Seeder
         $item->categories()->attach([2, 12]);
 
         $item = Item::create([
-            'user_id' => 10,
+            'user_id' => $sellerB->id,
             'name' => 'メイクセット',
             'price' => 2500,
             'brand' => null,
@@ -125,4 +131,5 @@ class ItemsTableSeeder extends Seeder
         ]);
         $item->categories()->attach([7, 9]);
     }
+
 }

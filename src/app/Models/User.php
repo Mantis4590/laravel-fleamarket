@@ -53,4 +53,11 @@ class User extends Authenticatable implements MustVerifyEmail
     public function likes() {
         return $this->likedItems();
     }
+
+    // 受けた取引評価（相手から自分に付いた評価）
+    public function receivedTransactionRatings()
+    {
+        return $this->hasMany(\App\Models\TransactionRating::class, 'ratee_id');
+    }
+
 }

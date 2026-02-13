@@ -34,12 +34,6 @@
 
 .mypage__edit-btn {
     margin-right: 250px;
-
-    
-}
-
-.mypage__tab:hover {
-    
 }
 
 .mypage__edit-btn {
@@ -109,7 +103,51 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
+    text-decoration: none;
+}
 
+/* 商品カードの左上バッジ */
+.mypage__tab-badge {
+    position: absolute;
+    top: 13px;
+    left: 526px;
+    min-width: 18px;
+    height: 18px;
+    padding: 0 6px;
+    border-radius: 999px;
+    background: #ff0000;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 商品画像の左上バッジ */
+.mypage__item-badge {
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    z-index: 10;
+
+    min-width: 18px;
+    height: 18px;
+    padding: 0 6px;
+
+    border-radius: 999px;
+
+    background: #ff0000;
+    color: #ffffff;
+
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .item-card__image {
@@ -122,5 +160,31 @@
 .mypage__item-name {
     margin-top: 8px;
     font-size: 14px;
+    text-decoration: none;
 }
 
+.mypage__name-area {
+    display: flex;
+    flex-direction: column;
+}
+
+.mypage__rating {
+    margin-top: 8px;
+    /* ユーザー名との距離：画像っぽく */
+    display: inline-flex;
+    gap: 6px;
+    /* ★の間隔 */
+    line-height: 1;
+}
+
+.mypage__star {
+    font-size: 26px;
+    /* サイズは好みで微調整 */
+    color: #d9d9d9;
+    /* グレー（空星） */
+}
+
+.mypage__star.is-filled {
+    color: #f4d000;
+    /* 黄色（埋まり星） */
+}
