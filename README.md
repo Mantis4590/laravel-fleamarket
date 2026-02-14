@@ -51,4 +51,4 @@ php artisan test
 | 紐づきなしユーザー | 未紐付けユーザー | no_relation@example.com | password | 商品・取引に紐づかない |
 
 ## ER図
-![ER図](./er.png)
+![ER図](./er.png)  
