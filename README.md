@@ -41,5 +41,14 @@ php artisan test
 ・MailHog  
 ・Stripe API（決済機能）
 
+## ダミーデータ（ユーザー）
+`php artisan migrate:fresh --seed` 実行時に、以下のユーザーが作成されます。
+
+| 区分 | 名前 | メールアドレス | パスワード | 備考 |  
+|---|---|---|---|---|  
+| C001〜C005 の出品者 | 出品者A | seller_a@example.com | password | 商品 C001〜C005 を出品 |  
+| C006〜C010 の出品者 | 出品者B | seller_b@example.com | password | 商品 C006〜C010 を出品 |  
+| 紐づきなしユーザー | 未紐付けユーザー | no_relation@example.com | password | 商品・取引に紐づかない |
+
 ## ER図
 ![ER図](./er.png)
