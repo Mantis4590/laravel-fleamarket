@@ -34,6 +34,7 @@ class StoreTransactionMessageRequest extends FormRequest
         return [
             'body.required' => '本文を入力してください',
             'body.max' => '本文は400文字以内で入力してください',
+            'image.image' => '画像ファイルをアップロードしてください',
             'image.mimes' => '「.png」または「.jpeg」形式でアップロードしてください',
         ];
     }

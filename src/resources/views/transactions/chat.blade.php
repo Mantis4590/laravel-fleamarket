@@ -2,6 +2,17 @@
 
 @section('css')
 <link rel="stylesheet" href="{{ asset('css/transaction_chat.css') }}">
+
+@section('header')
+<header class="header header--simple">
+    <div class="header__left">
+        <a href="{{ route('home') }}">
+            <img src="{{ asset('logo.svg') }}" alt="COACHTECHロゴ" class="header__logo">
+        </a>
+    </div>
+</header>
+@endsection
+
 @endsection
 
 @section('main_class', 'main--transaction-chat')
@@ -152,14 +163,14 @@
                         {{-- 編集/削除 --}}
                         @if($isMine)
                             <div class="transaction-chat__actions">
-                                <details class="transaction-chat_edit">
+                                <details class="transaction-chat__edit">
                                     <summary class="transaction-chat__action">編集</summary>
 
                                     <form method="POST" action="{{ route('transactions.messages.update', [$item, $message]) }}" class="transaction-chat__edit-form">
                                         @csrf
                                         @method('PATCH')
 
-                                        <input type="text"name="body"class="transaction-chat__input" value="{{ old('body', $message->body) }}">
+                                        <input type="text" name="body" class="transaction-chat__input" value="{{ old('body', $message->body) }}">
 
                                         <button type="submit" class="transaction-chat__edit-submit">更新</button>
                                     </form>
@@ -199,7 +210,18 @@
             </label>
 
             <button class="transaction-chat__send" type="submit" aria-label="送信">
-                ▶
+                <svg xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    width="22"
+                    height="22"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <path d="M22 2L11 13"></path>
+                    <path d="M22 2L15 22L11 13L2 9L22 2Z"></path>
+                </svg>
             </button>
         </form>
 
@@ -212,7 +234,7 @@
                 <div class="transaction-chat__modal-title">取引が完了しました。</div>
 
                 <div class="transaction-chat__modal-sub">
-                    今回の取引相手「{{ $rateeUser?->name ?? '' }}」さんはどうでしたか？
+                    今回の取引相手はどうでしたか？
                 </div>
 
                 <form method="POST" action="{{ route('transactions.rating.store', $item) }}">

@@ -20,7 +20,9 @@
     width: 240px;
     background: #777;
     color: #fff;
-    padding: 20px 16px;
+    padding: 10px 16px;
+    text-align: center;
+    font-size: 25px;
 }
 
 .transaction-chat__sidebar-title {
@@ -95,7 +97,7 @@
     font-weight: 800;
 }
 
-.transaction-chat__complete-button-link {
+.transaction-chat__complete-button {
     background: #ff8c8c;
     color: #fff;
     border: none;
@@ -132,12 +134,11 @@
 .transaction-chat__item-name {
     font-size: 28px;
     font-weight: 800;
-    margin-bottom: 8px;
+    margin-bottom: 13px;
 }
 
 .transaction-chat__item-price {
-    font-size: 18px;
-    font-weight: 700;
+    font-size: 25px;
 }
 
 .transaction-chat__divider {
@@ -186,9 +187,11 @@
 }
 
 .transaction-chat__username {
-    font-size: 12px;
+    font-size: 15px;
     font-weight: 700;
     color: #000;
+    font-weight: bold;
+    margin-right: 10px;
 }
 
 .transaction-chat__bubble-area {
@@ -200,19 +203,72 @@
     padding: 12px 14px;
     border-radius: 4px;
     min-height: 42px;
+    margin-top: 7px;
 }
 
 .transaction-chat__actions {
-    margin-top: 6px;
+    margin-top: 7px;
     text-align: right;
     font-size: 12px;
     color: #666;
+    display: flex;
+    right: 0;
+    justify-content: flex-end;
+    gap: 10px;
 }
 
 .transaction-chat__action {
     color: #666;
     text-decoration: none;
+    margin-left: 5px;
+    ;
+    border: none;
+    background: none;
+    font-size: 12px;
+}
+
+/* details開いた時に編集フォームが横並び崩さないように：フォームは下に出す */
+.transaction-chat__edit {
+    position: relative;
+    margin-top: 1px;
+    font-size: 12px;
+}
+
+.transaction-chat__edit[open] .transaction-chat__edit-form {
+    top: 100%;
+    right: 0;
+    /* 右寄せしたいなら */
+    margin-top: 8px;
+    z-index: 50;
+    background: #fff;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+}
+
+.transaction-chat__edit-form {
+    display: flex;
+    align-items: center;
+}
+
+.transaction-chat__edit>summary {
+    list-style: none;
+    cursor: pointer;
+}
+
+.transaction-chat__edit-submit {
+    height: 34px;
+    padding: 0 10px;
+    border: 1px solid #bbb;
+    background: #fff;
+    border-radius: 4px;
+    cursor: pointer;
     margin-left: 10px;
+}
+
+/* Chrome/Safari */
+.transaction-chat__edit>summary::-webkit-details-marker {
+    display: none;
 }
 
 .transaction-chat__form {
@@ -227,17 +283,18 @@
     flex: 1;
     height: 40px;
     padding: 0 12px;
-    border: 1px solid #bbb;
+    border: 1px solid #7d7d7d;
     border-radius: 2px;
+    color: #7d7d7d;
 }
 
 .transaction-chat__add-image {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    border: 1px solid #ff8c8c;
-    color: #ff8c8c;
-    padding: 8px 12px;
+    border: 1px solid #ff5555;
+    color: #ff5555;
+    padding: 4px 15px;
     border-radius: 6px;
     cursor: pointer;
     font-weight: 700;
@@ -245,12 +302,20 @@
 }
 
 .transaction-chat__send {
-    width: 44px;
-    height: 44px;
+    width: 48px;
+    height: 48px;
     border: none;
     background: transparent;
     font-size: 22px;
     cursor: pointer;
+    color: #333;
+}
+
+.transaction-chat__send svg {
+    width: 28px;
+    height: 28px;
+    margin-top: 5px;
+    margin-right: 20px;
 }
 
 .transaction-chat__form-errors {
@@ -297,7 +362,23 @@
 .transaction-chat__modal-title {
     font-size: 22px;
     font-weight: 800;
-    margin-bottom: 10px;
+
+    /* ここが肝：縦中央 */
+    display: flex;
+    align-items: center;
+
+    /* 参照っぽい高さ（好みで微調整） */
+    height: 64px;
+
+    /* 下線をモーダル幅いっぱいにしたいので左右を突き抜け */
+    margin: -22px -22px 10px;
+    /* ←上の余白も揃う */
+    padding: 0 22px;
+
+    border-bottom: 1px solid #000;
+
+    /* 左寄せ */
+    justify-content: flex-start;
 }
 
 .transaction-chat__modal-sub {
@@ -306,11 +387,37 @@
     margin-bottom: 14px;
 }
 
+/* モーダル内のformは幅100%に */
+.transaction-chat__modal form {
+    width: 100%;
+}
+
+/* 星エリア：中央寄せ */
 .transaction-chat__stars {
-    display: inline-flex;
-    flex-direction: row-reverse;
-    gap: 10px;
+    position: relative;
+    /* ←これ必須（afterの基準） */
+    display: flex;
+    justify-content: center;
+    gap: 18px;
+
+    width: 100%;
+    padding: 20px 0;
     margin: 8px 0 18px;
+
+    border-bottom: none;
+    /* ←下線を本体で引かない */
+}
+
+/* 星の下線：モーダルのpadding(22px)を突き抜けて全幅 */
+.transaction-chat__stars::after {
+    content: "";
+    position: absolute;
+    left: -22px;
+    /* ←モーダルpadding分だけ外へ */
+    right: -22px;
+    /* ←右も同じだけ外へ */
+    bottom: 0;
+    border-bottom: 1px solid #000;
 }
 
 .transaction-chat__star-input {

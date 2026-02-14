@@ -94,6 +94,11 @@
     text-align: center;
 }
 
+.mypage__item-card--link {
+    text-decoration: none;
+    color: #000;
+}
+
 .mypage__item-img {
     width: 100%;
     aspect-ratio: 1 / 1;
