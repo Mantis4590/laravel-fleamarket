@@ -237,7 +237,6 @@
 .transaction-chat__edit[open] .transaction-chat__edit-form {
     top: 100%;
     right: 0;
-    /* 右寄せしたいなら */
     margin-top: 8px;
     z-index: 50;
     background: #fff;
@@ -362,22 +361,12 @@
 .transaction-chat__modal-title {
     font-size: 22px;
     font-weight: 800;
-
-    /* ここが肝：縦中央 */
     display: flex;
     align-items: center;
-
-    /* 参照っぽい高さ（好みで微調整） */
     height: 64px;
-
-    /* 下線をモーダル幅いっぱいにしたいので左右を突き抜け */
     margin: -22px -22px 10px;
-    /* ←上の余白も揃う */
     padding: 0 22px;
-
     border-bottom: 1px solid #000;
-
-    /* 左寄せ */
     justify-content: flex-start;
 }
 
@@ -395,17 +384,13 @@
 /* 星エリア：中央寄せ */
 .transaction-chat__stars {
     position: relative;
-    /* ←これ必須（afterの基準） */
     display: flex;
     justify-content: center;
     gap: 18px;
-
     width: 100%;
     padding: 20px 0;
     margin: 8px 0 18px;
-
     border-bottom: none;
-    /* ←下線を本体で引かない */
 }
 
 /* 星の下線：モーダルのpadding(22px)を突き抜けて全幅 */
@@ -413,9 +398,7 @@
     content: "";
     position: absolute;
     left: -22px;
-    /* ←モーダルpadding分だけ外へ */
     right: -22px;
-    /* ←右も同じだけ外へ */
     bottom: 0;
     border-bottom: 1px solid #000;
 }

@@ -66,7 +66,6 @@ body {
 
 .item-detail__info p:first-of-type {
     margin-top: 0;
-    /* ← 上の余白をほんの少しだけ空ける（自然に） */
 }
 
 .item-detail__price {
@@ -195,7 +194,6 @@ body {
     color: #555;
     padding: 0;
     transition: opacity 0.25s;
-
 }
 
 .item-detail__icon:hover {
@@ -210,7 +208,6 @@ body {
     font-size: 14px;
     color: #333;
     line-height: 1;
-    
 }
 
 .item-detail__icon.material-icons-outlined {
@@ -221,13 +218,12 @@ body {
     align-items: center;
     justify-content: center;
     position: relative;
-    top: 2px; /* ← ここがポイント！コメントアイコンを下げる */
+    top: 2px;
 }
 
 .material-icons-outlined.item-detail__icon {
     position: relative;
     top: 1px;
-    /* ← コメントアイコンをほんの少し下げる */
 }
 
 .item-detail__error {
@@ -236,15 +232,10 @@ body {
     margin-top: 4px;
 }
 
-/* ===============================
-   アイコン間隔の最終調整
-   =============================== */
 .item-detail__actions {
     display: flex;
     gap: 32px;
-    /* ← 星と吹き出しの横の間隔 */
     align-items: flex-start;
-    /* ← baselineを避ける */
 }
 
 .item-detail__action {
@@ -252,7 +243,6 @@ body {
     flex-direction: column;
     align-items: center;
     gap: 2px;
-    /* ← アイコンと数字の距離を統一 */
 }
 
 /* 星（いいね）アイコン */
@@ -272,7 +262,6 @@ body {
     align-items: center;
     justify-content: center;
     transform: translateY(1px);
-    /* ← topよりも安定する */
 }
 
 /* カウント数字 */

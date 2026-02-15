@@ -77,9 +77,6 @@
     color: #ff4d4d;
 }
 
-/* ===============================
-   商品リスト部分
-   =============================== */
 .mypage__item-list {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -175,21 +172,16 @@
 
 .mypage__rating {
     margin-top: 8px;
-    /* ユーザー名との距離：画像っぽく */
     display: inline-flex;
     gap: 6px;
-    /* ★の間隔 */
     line-height: 1;
 }
 
 .mypage__star {
     font-size: 26px;
-    /* サイズは好みで微調整 */
     color: #d9d9d9;
-    /* グレー（空星） */
 }
 
 .mypage__star.is-filled {
     color: #f4d000;
-    /* 黄色（埋まり星） */
 }
